@@ -7,7 +7,27 @@
 
 import UIKit
 
+@IBDesignable
 class ConnectorView: UIView {
+    
+    @IBInspectable var borderWidth: CGFloat = 0 {
+            didSet {
+                layer.borderWidth = borderWidth
+            }
+        }
+    
+    @IBInspectable var borderColor: UIColor? {
+            didSet {
+                layer.borderColor = borderColor?.cgColor
+            }
+        }
+    
+    @IBInspectable var cornerRadius: CGFloat = 0 {
+            didSet {
+                layer.cornerRadius = cornerRadius
+                layer.masksToBounds = cornerRadius > 0
+            }
+        }
     
     // MARK: - IB
     
@@ -33,6 +53,10 @@ class ConnectorView: UIView {
         
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        
+//        contentView.layer.borderWidth = 0.5
+//        contentView.layer.borderColor = UIColor.black.cgColor
+//        contentView.layer.cornerRadius = 10
     }       
 
 }

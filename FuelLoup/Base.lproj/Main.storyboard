@@ -149,20 +149,17 @@
                                             </view>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstItem="eTs-Mf-rkH" firstAttribute="centerX" secondItem="Bbz-84-tF1" secondAttribute="centerX" id="Mln-IR-u0W"/>
                                             <constraint firstItem="eTs-Mf-rkH" firstAttribute="top" secondItem="Bbz-84-tF1" secondAttribute="top" id="duj-uL-ce7"/>
-                                            <constraint firstItem="jjs-S0-0WT" firstAttribute="top" secondItem="eTs-Mf-rkH" secondAttribute="bottom" id="zI2-TG-o7y"/>
                                         </constraints>
                                         <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="Bbz-84-tF1" firstAttribute="top" secondItem="0Ie-q0-h0f" secondAttribute="top" id="4Te-i4-b4B"/>
                                     <constraint firstItem="Bbz-84-tF1" firstAttribute="leading" secondItem="0Ie-q0-h0f" secondAttribute="leading" id="8aj-qi-H93"/>
-                                    <constraint firstItem="Bbz-84-tF1" firstAttribute="leading" secondItem="wpz-Dl-6KM" secondAttribute="leading" id="EVS-6k-XQr"/>
                                     <constraint firstItem="Bbz-84-tF1" firstAttribute="height" secondItem="wpz-Dl-6KM" secondAttribute="height" id="FSe-2W-m5d"/>
                                     <constraint firstItem="Bbz-84-tF1" firstAttribute="top" secondItem="wpz-Dl-6KM" secondAttribute="top" id="QfM-pR-NYJ"/>
-                                    <constraint firstItem="Bbz-84-tF1" firstAttribute="trailing" secondItem="wpz-Dl-6KM" secondAttribute="trailing" constant="414" id="a34-7l-5cU"/>
-                                    <constraint firstItem="Bbz-84-tF1" firstAttribute="width" secondItem="0Ie-q0-h0f" secondAttribute="width" id="gUW-1a-qut"/>
+                                    <constraint firstItem="Bbz-84-tF1" firstAttribute="trailing" secondItem="wpz-Dl-6KM" secondAttribute="trailing" id="a34-7l-5cU"/>
                                     <constraint firstItem="0Ie-q0-h0f" firstAttribute="trailing" secondItem="Bbz-84-tF1" secondAttribute="trailing" id="q0d-8a-5NJ"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="wpz-Dl-6KM"/>
