@@ -75,18 +75,6 @@
                 <constraint firstItem="SEF-yQ-nDt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="JgF-aF-S3T"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="number" keyPath="contentView.layer.cornerRadius">
-                    <integer key="value" value="10"/>
-                </userDefinedRuntimeAttribute>
-                <userDefinedRuntimeAttribute type="color" keyPath="contentView.layer.borderColor">
-                    <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </userDefinedRuntimeAttribute>
-                <userDefinedRuntimeAttribute type="boolean" keyPath="contentView.masksToBounds" value="YES"/>
-                <userDefinedRuntimeAttribute type="number" keyPath="contentView.layer.borderWidth">
-                    <integer key="value" value="1"/>
-                </userDefinedRuntimeAttribute>
-            </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="-94.20289855072464" y="-119.53125"/>
         </view>
     </objects>

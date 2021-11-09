@@ -9,7 +9,7 @@ import Foundation
 import MapKit
 import CoreLocation
 
-class MapTabViewController: UIViewController {
+final class MapTabViewController: UIViewController {
     
     // MARK: - IB
     
@@ -18,7 +18,7 @@ class MapTabViewController: UIViewController {
     
     // MARK: - Properties
     
-    let locationManager = CLLocationManager()
+    private let locationManager = CLLocationManager()
     var poi: Poi?
     var poiDetailsId: String?
     var chargingAvailabilityId: String?
@@ -166,20 +166,6 @@ extension MapTabViewController: MKMapViewDelegate {
             performSegue(withIdentifier: "showStationDetails", sender: nil)
         }
     }
-    
-//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-//        guard let annotation = view.annotation as? EvStationPointAnnotation else { return }
-//
-//        poiDetailsId = annotation.poiDetailsId
-//        chargingAvailabilityId = annotation.chargingAvailabilityId
-//
-//        let selectedAnnotations = mapView.selectedAnnotations
-//        for annotation in selectedAnnotations {
-//            mapView.deselectAnnotation(annotation, animated: false)
-//        }
-//
-//        performSegue(withIdentifier: "showStationDetails", sender: nil)
-//    }
     
 }
 

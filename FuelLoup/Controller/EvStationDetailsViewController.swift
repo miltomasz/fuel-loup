@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EvStationDetailsViewController: UIViewController {
+final class EvStationDetailsViewController: UIViewController {
     
     // MARK: - IB
     
@@ -36,16 +36,16 @@ class EvStationDetailsViewController: UIViewController {
         setupBasicInfo()
         setupChargingPark()
         
+        loadPhotoIfExists()
+    }
+    
+    private func loadPhotoIfExists() {
         if let poiDetailsId = poiDetailsId {
             NetworkHelper.showLoader(true, activityIndicator: activityIndicator)
-            
             FuelLoupClient.getEvStationDetails(id: poiDetailsId, completion: handleStationDetailsResponse(details:error:))
         } else {
-            hideImageView()
-        }
-        
-        if let chargingAvailabilityId = chargingAvailabilityId  {
-            
+            stationImage.image = UIImage(named: "default-station-icon")
+            stationImage.contentMode = .scaleAspectFill
         }
     }
     
@@ -61,14 +61,16 @@ class EvStationDetailsViewController: UIViewController {
     
     private func handlePhotoResponse(image: UIImage?, error: Error?) {
         NetworkHelper.showLoader(false, activityIndicator: activityIndicator)
-        
         guard let image = image else {
-            stationImage.image = UIImage(named: "default-station-image")
+            stationImage.image = UIImage(named: "default-station-icon")
+            stationImage.contentMode = .scaleAspectFill
             return
         }
         
         stationImage.image = image
     }
+    
+    // MARK: - Setup layout
     
     private func setupTitle() {
         if let nameArray = poi?.name.components(separatedBy: ","), nameArray.count > 1 {
@@ -82,7 +84,7 @@ class EvStationDetailsViewController: UIViewController {
     
     private func setupBasicInfo() {
         basicInfoView.layer.borderWidth = 0.5
-        basicInfoView.layer.borderColor = UIColor.black.cgColor
+        basicInfoView.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         basicInfoView.layer.cornerRadius = 10
         
         labelText(for: name, label: nameLabel, text: poi?.name)
@@ -96,10 +98,6 @@ class EvStationDetailsViewController: UIViewController {
             name.isHidden = true
             label.isHidden = true
         }
-    }
-    
-    private func hideImageView() {
-        stationImage.isHidden = true
     }
     
     private func setupChargingPark() {

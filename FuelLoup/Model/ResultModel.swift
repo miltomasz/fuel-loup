@@ -31,8 +31,8 @@ struct Address: Decodable {
     let streetNumber: String?
     let streetName: String?
     let municipality: String?
-    let postalCode: String
-    let country: String
+    let postalCode: String?
+    let country: String?
 
 }
 
