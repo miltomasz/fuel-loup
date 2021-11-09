@@ -34,6 +34,7 @@ final class EvStationDetailsViewController: UIViewController {
         
         setupTitle()
         setupBasicInfo()
+        setupConnectorsLabel()
         setupChargingPark()
         
         loadPhotoIfExists()
@@ -89,6 +90,21 @@ final class EvStationDetailsViewController: UIViewController {
         
         labelText(for: name, label: nameLabel, text: poi?.name)
         labelText(for: phone, label: phoneLabel, text: poi?.phone)
+    }
+    
+    private func setupConnectorsLabel() {
+        let connectorsLabel = UILabel()
+        connectorsLabel.text = "Connectors"
+        connectorsLabel.textAlignment = .left
+        connectorsLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
+        connectorsLabel.textColor = .black
+        
+        connectorsLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            connectorsLabel.heightAnchor.constraint(equalToConstant: 40.0)
+        ])
+        
+        contentStackView.addArrangedSubview(connectorsLabel)
     }
     
     private func labelText(for name: UILabel, label: UILabel, text: String?) {
