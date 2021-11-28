@@ -204,7 +204,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eBe-GN-2PA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3511.594202898551" y="304.6875"/>
+            <point key="canvasLocation" x="3541" y="423"/>
         </scene>
         <!--List-->
         <scene sceneID="Q54-xU-Tmm">
@@ -226,23 +226,137 @@
         <!--Table View Controller-->
         <scene sceneID="8YQ-vO-hfE">
             <objects>
-                <viewController id="inI-S9-Xca" userLabel="Table View Controller" sceneMemberID="viewController">
+                <viewController id="inI-S9-Xca" userLabel="Table View Controller" customClass="TableTabViewController" customModule="FuelLoup" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Rx-ac-Uq4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ha3-SR-bIU">
+                                <rect key="frame" x="182" y="423" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="gK2-oB-Na3"/>
+                                    <constraint firstAttribute="width" constant="50" id="kdc-Bc-pmE"/>
+                                </constraints>
+                            </activityIndicatorView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="75" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YWi-hg-cri">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="N43-Vh-QBk" customClass="UITableViewHeaderFooterView">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Electric vehicle connectors" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hxn-vZ-Fd6">
+                                            <rect key="frame" x="8" y="0.0" width="398" height="44"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="Hxn-vZ-Fd6" secondAttribute="bottom" id="56D-Jt-BhP"/>
+                                        <constraint firstAttribute="trailing" secondItem="Hxn-vZ-Fd6" secondAttribute="trailing" constant="8" id="8W9-wS-Ag3"/>
+                                        <constraint firstItem="Hxn-vZ-Fd6" firstAttribute="leading" secondItem="N43-Vh-QBk" secondAttribute="leading" constant="8" id="LTM-5h-Kil"/>
+                                        <constraint firstItem="Hxn-vZ-Fd6" firstAttribute="top" secondItem="N43-Vh-QBk" secondAttribute="top" id="jQo-14-QBe"/>
+                                    </constraints>
+                                </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EvStationLocationCell" id="NTZ-ju-NGQ" customClass="EvStationLocationCell" customModule="FuelLoup" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="414" height="73.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NTZ-ju-NGQ" id="dNd-s7-9Z4">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="73.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FNt-h4-Vww">
+                                                    <rect key="frame" x="4" y="4" width="66" height="66"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="66" id="6uC-el-0Yd"/>
+                                                        <constraint firstAttribute="height" constant="66" id="8G1-EE-43T"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="V9J-3n-PvH" userLabel="Ev Stack View">
+                                                    <rect key="frame" x="78" y="4" width="239" height="65.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qWh-VV-kZq">
+                                                            <rect key="frame" x="0.0" y="0.0" width="55" height="24.5"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Place" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BsE-On-Wnw">
+                                                            <rect key="frame" x="0.0" y="41.5" width="40" height="24"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.7 km" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Cl-oh-igH">
+                                                    <rect key="frame" x="325" y="22.5" width="69" height="29"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                    <color key="textColor" systemColor="systemGray2Color"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="3Cl-oh-igH" firstAttribute="trailing" secondItem="dNd-s7-9Z4" secondAttribute="trailingMargin" id="6t3-Cb-maa"/>
+                                                <constraint firstItem="3Cl-oh-igH" firstAttribute="centerY" secondItem="dNd-s7-9Z4" secondAttribute="centerY" id="Its-9Z-OMz"/>
+                                                <constraint firstItem="3Cl-oh-igH" firstAttribute="leading" secondItem="V9J-3n-PvH" secondAttribute="trailing" constant="8" id="Qs5-QN-Zhb"/>
+                                                <constraint firstAttribute="bottom" secondItem="V9J-3n-PvH" secondAttribute="bottom" constant="4" id="cgK-tq-cxZ"/>
+                                                <constraint firstItem="FNt-h4-Vww" firstAttribute="leading" secondItem="dNd-s7-9Z4" secondAttribute="leading" constant="4" id="eHl-a7-jT7"/>
+                                                <constraint firstItem="FNt-h4-Vww" firstAttribute="top" secondItem="dNd-s7-9Z4" secondAttribute="top" constant="4" id="fTU-BV-FN4"/>
+                                                <constraint firstItem="V9J-3n-PvH" firstAttribute="leading" secondItem="FNt-h4-Vww" secondAttribute="trailing" constant="8" id="pqG-v8-PFL"/>
+                                                <constraint firstItem="V9J-3n-PvH" firstAttribute="top" secondItem="dNd-s7-9Z4" secondAttribute="top" constant="4" id="zqN-yS-OY8"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="address" destination="BsE-On-Wnw" id="OY0-0B-bB8"/>
+                                            <outlet property="distance" destination="3Cl-oh-igH" id="WX5-Ey-Rc8"/>
+                                            <outlet property="evStationimageView" destination="FNt-h4-Vww" id="3QZ-u8-09L"/>
+                                            <outlet property="imageView" destination="FNt-h4-Vww" id="LB8-tv-fpF"/>
+                                            <outlet property="name" destination="qWh-VV-kZq" id="0og-dM-Mmp"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="inI-S9-Xca" id="P9W-pc-b8Q"/>
+                                    <outlet property="delegate" destination="inI-S9-Xca" id="Qhr-2F-NIJ"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="nvf-6f-hC4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ha3-SR-bIU" firstAttribute="centerX" secondItem="6Rx-ac-Uq4" secondAttribute="centerX" id="Rsu-rL-NnH"/>
+                            <constraint firstItem="ha3-SR-bIU" firstAttribute="centerY" secondItem="6Rx-ac-Uq4" secondAttribute="centerY" id="a5n-mO-CQE"/>
+                            <constraint firstItem="YWi-hg-cri" firstAttribute="top" secondItem="nvf-6f-hC4" secondAttribute="top" id="dAu-SH-saf"/>
+                            <constraint firstItem="nvf-6f-hC4" firstAttribute="trailing" secondItem="YWi-hg-cri" secondAttribute="trailing" id="dTg-Oh-Rx3"/>
+                            <constraint firstItem="nvf-6f-hC4" firstAttribute="bottom" secondItem="YWi-hg-cri" secondAttribute="bottom" id="xlG-7x-d1t"/>
+                            <constraint firstItem="YWi-hg-cri" firstAttribute="leading" secondItem="nvf-6f-hC4" secondAttribute="leading" id="zJj-6E-vFC"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="FuelLoup" id="f3u-PD-8uM"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="ha3-SR-bIU" id="OMh-YG-WfY"/>
+                        <outlet property="tableView" destination="YWi-hg-cri" id="QzJ-NM-xMx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W8Y-eC-kgn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2143" y="688"/>
+            <point key="canvasLocation" x="2142.0289855072465" y="687.72321428571422"/>
         </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

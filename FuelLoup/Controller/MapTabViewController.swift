@@ -65,6 +65,7 @@ final class MapTabViewController: UIViewController {
         NetworkHelper.showLoader(false, activityIndicator: activityIndicator)
         
         if let results = results, !results.isEmpty {
+            setupTableTabViewModel(results: results)
             setupAnnotations(results: results)
         } else {
             guard let tabBarController = tabBarController else { return }
@@ -111,6 +112,21 @@ final class MapTabViewController: UIViewController {
         }
         
         return annotations
+    }
+    
+    private func setupTableTabViewModel(results: [Result]) {
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        guard let currentLocation = locationManager.location else { return }
+        
+        appDelegate?.evStations = results.map { result in
+            ResultViewModel(result: result, currentLocation: currentLocation)
+        }.sorted(by: { rvm1, rvm2 in
+            do {
+                return try LocationHelper.distanceSorting(currentLocation, rvm1.result, rvm2.result)
+            } catch {
+                return false
+            }
+        })
     }
     
 }

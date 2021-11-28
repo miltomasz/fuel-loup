@@ -74,13 +74,7 @@ final class EvStationDetailsViewController: UIViewController {
     // MARK: - Setup layout
     
     private func setupTitle() {
-        if let nameArray = poi?.name.components(separatedBy: ","), nameArray.count > 1 {
-            title = nameArray.first
-        } else if let nameArray = poi?.name.components(separatedBy: " "), nameArray.count > 1 {
-            title = nameArray.first
-        } else {
-            title = "Station"
-        }
+        title = EvStationHelper.extractStationName(from: poi)
     }
     
     private func setupBasicInfo() {
