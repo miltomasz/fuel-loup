@@ -11,6 +11,11 @@
 		063F9F7926D2C812006DF74F /* DetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063F9F7826D2C812006DF74F /* DetailsModel.swift */; };
 		063F9F7B26D31B72006DF74F /* EvStationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063F9F7A26D31B72006DF74F /* EvStationDetailsViewController.swift */; };
 		063F9F7E26E033BA006DF74F /* EvStationPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063F9F7D26E033BA006DF74F /* EvStationPointAnnotation.swift */; };
+		064EBAA927446A4D00DBBC9A /* TableTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EBAA827446A4D00DBBC9A /* TableTabViewController.swift */; };
+		064EBAAC274478C300DBBC9A /* EvStationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EBAAB274478C300DBBC9A /* EvStationHelper.swift */; };
+		064EBAAE2745C60300DBBC9A /* EvStationLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EBAAD2745C60300DBBC9A /* EvStationLocationCell.swift */; };
+		064EBAB2274ED13800DBBC9A /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EBAB1274ED13800DBBC9A /* LocationHelper.swift */; };
+		064EBAB62753F28900DBBC9A /* ResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EBAB52753F28900DBBC9A /* ResultViewModel.swift */; };
 		069959192714F22B00D90343 /* ConnectorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 069959182714F22B00D90343 /* ConnectorView.xib */; };
 		0699591B2716355E00D90343 /* ConnectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0699591A2716355E00D90343 /* ConnectorView.swift */; };
 		06BB44202693B9FA00357948 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BB441F2693B9FA00357948 /* AppDelegate.swift */; };
@@ -46,6 +51,11 @@
 		063F9F7826D2C812006DF74F /* DetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsModel.swift; sourceTree = "<group>"; };
 		063F9F7A26D31B72006DF74F /* EvStationDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvStationDetailsViewController.swift; sourceTree = "<group>"; };
 		063F9F7D26E033BA006DF74F /* EvStationPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvStationPointAnnotation.swift; sourceTree = "<group>"; };
+		064EBAA827446A4D00DBBC9A /* TableTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableTabViewController.swift; sourceTree = "<group>"; };
+		064EBAAB274478C300DBBC9A /* EvStationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvStationHelper.swift; sourceTree = "<group>"; };
+		064EBAAD2745C60300DBBC9A /* EvStationLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvStationLocationCell.swift; sourceTree = "<group>"; };
+		064EBAB1274ED13800DBBC9A /* LocationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHelper.swift; sourceTree = "<group>"; };
+		064EBAB52753F28900DBBC9A /* ResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewModel.swift; sourceTree = "<group>"; };
 		069959182714F22B00D90343 /* ConnectorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectorView.xib; sourceTree = SOURCE_ROOT; };
 		0699591A2716355E00D90343 /* ConnectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectorView.swift; sourceTree = "<group>"; };
 		06BB441C2693B9FA00357948 /* FuelLoup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FuelLoup.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,8 +91,26 @@
 				069959182714F22B00D90343 /* ConnectorView.xib */,
 				063F9F7D26E033BA006DF74F /* EvStationPointAnnotation.swift */,
 				0699591A2716355E00D90343 /* ConnectorView.swift */,
+				064EBAAD2745C60300DBBC9A /* EvStationLocationCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		064EBAAA2744789100DBBC9A /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				064EBAAB274478C300DBBC9A /* EvStationHelper.swift */,
+				064EBAB1274ED13800DBBC9A /* LocationHelper.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		064EBAB42753F26E00DBBC9A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				064EBAB52753F28900DBBC9A /* ResultViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		06BB44132693B9FA00357948 = {
@@ -105,6 +133,8 @@
 		06BB441E2693B9FA00357948 /* FuelLoup */ = {
 			isa = PBXGroup;
 			children = (
+				064EBAB42753F26E00DBBC9A /* ViewModel */,
+				064EBAAA2744789100DBBC9A /* Utility */,
 				063F9F7C26E0338A006DF74F /* View */,
 				06BB443A2693C5EE00357948 /* Network */,
 				06BB44382693BF7B00357948 /* Controller */,
@@ -135,6 +165,7 @@
 			children = (
 				06BB445026966E9300357948 /* MapTabViewController.swift */,
 				063F9F7A26D31B72006DF74F /* EvStationDetailsViewController.swift */,
+				064EBAA827446A4D00DBBC9A /* TableTabViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -229,11 +260,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				0699591B2716355E00D90343 /* ConnectorView.swift in Sources */,
+				064EBAB62753F28900DBBC9A /* ResultViewModel.swift in Sources */,
+				064EBAAC274478C300DBBC9A /* EvStationHelper.swift in Sources */,
 				063F9F7726B8B169006DF74F /* ResultModel.swift in Sources */,
 				063F9F7B26D31B72006DF74F /* EvStationDetailsViewController.swift in Sources */,
 				06BB444B26950DE100357948 /* StationsResponse.swift in Sources */,
 				06BB445326966ECF00357948 /* NetworkHelper.swift in Sources */,
 				06BB445126966E9300357948 /* MapTabViewController.swift in Sources */,
+				064EBAA927446A4D00DBBC9A /* TableTabViewController.swift in Sources */,
+				064EBAB2274ED13800DBBC9A /* LocationHelper.swift in Sources */,
+				064EBAAE2745C60300DBBC9A /* EvStationLocationCell.swift in Sources */,
 				06BB442A2693B9FA00357948 /* FuelLoup.xcdatamodeld in Sources */,
 				063F9F7E26E033BA006DF74F /* EvStationPointAnnotation.swift in Sources */,
 				06BB44202693B9FA00357948 /* AppDelegate.swift in Sources */,

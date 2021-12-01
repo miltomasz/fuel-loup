@@ -320,6 +320,7 @@
                                             <outlet property="evStationimageView" destination="FNt-h4-Vww" id="3QZ-u8-09L"/>
                                             <outlet property="imageView" destination="FNt-h4-Vww" id="LB8-tv-fpF"/>
                                             <outlet property="name" destination="qWh-VV-kZq" id="0og-dM-Mmp"/>
+                                            <segue destination="iio-ta-swV" kind="show" id="swG-ZM-4Xg"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -351,6 +352,9 @@
             <point key="canvasLocation" x="2142.0289855072465" y="687.72321428571422"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="swG-ZM-4Xg"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -33,6 +33,18 @@ final class TableTabViewController: UIViewController {
         super.viewDidAppear(animated)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let selectedIndexPathRow = tableView.indexPathForSelectedRow?.row, let stationDetailsViewController = segue.destination as? EvStationDetailsViewController else { return }
+        
+        let selectedEvStation = evStationsViewModel[selectedIndexPathRow]
+        
+        stationDetailsViewController.chargingPark = selectedEvStation.result.chargingPark
+        stationDetailsViewController.poi = selectedEvStation.result.poi
+        stationDetailsViewController.poiDetailsId = selectedEvStation.result.dataSources.poiDetails?[0].id
+        stationDetailsViewController.chargingAvailabilityId = selectedEvStation.result.dataSources.chargingAvailability.id
+        stationDetailsViewController.hidesBottomBarWhenPushed = true
+    }
+    
     private func updateEvStationLocations() {
         locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
@@ -87,6 +99,16 @@ extension TableTabViewController: UITableViewDataSource {
     }
     
 }
+
+// MARK: - UITableViewDelegate
+
+//extension TableTabViewController: UITableViewDelegate {
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        selectedEvStation = evStationsViewModel[indexPath.row]
+//    }
+//
+//}
 
 // MARK: - CLLocationManagerDelegate
 
