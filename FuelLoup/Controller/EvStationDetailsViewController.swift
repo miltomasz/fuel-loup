@@ -62,6 +62,7 @@ final class EvStationDetailsViewController: UIViewController {
     
     private func handlePhotoResponse(image: UIImage?, error: Error?) {
         NetworkHelper.showLoader(false, activityIndicator: activityIndicator)
+        
         guard let image = image else {
             stationImage.image = UIImage(named: "default-station-icon")
             stationImage.contentMode = .scaleAspectFill
