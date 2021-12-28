@@ -13,8 +13,8 @@ struct Result: Decodable {
     let poi: Poi
     let address: Address
     let position: Position
-    let chargingPark: ChargingPark
-    let dataSources: DataSources
+    let chargingPark: ChargingPark?
+    let dataSources: DataSources?
     
 }
 

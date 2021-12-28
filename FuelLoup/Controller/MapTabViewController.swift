@@ -95,12 +95,17 @@ final class MapTabViewController: UIViewController {
             
             let annotation = EvStationPointAnnotation()
             annotation.coordinate = coordinate
-            annotation.title = result.chargingPark.connectors.map { $0.connectorType }.joined(separator: ", ")
-            
-            annotation.chargingPark = result.chargingPark
             annotation.poi = result.poi
-            annotation.poiDetailsId = result.dataSources.poiDetails?[0].id
-            annotation.chargingAvailabilityId = result.dataSources.chargingAvailability.id
+            
+            if let chargingPark = result.chargingPark {
+                annotation.title = chargingPark.connectors.compactMap { $0.connectorType }.joined(separator: ", ")
+                annotation.chargingPark = result.chargingPark
+            }
+            
+            if let dataSources = result.dataSources {
+                annotation.poiDetailsId = dataSources.poiDetails?[0].id
+                annotation.chargingAvailabilityId = dataSources.chargingAvailability.id
+            }
             
             if let streetName = result.address.streetName, let streetNumber = result.address.streetNumber {
                 annotation.subtitle = "\(streetName) \(streetNumber)"

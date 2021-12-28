@@ -40,8 +40,12 @@ final class TableTabViewController: UIViewController {
         
         stationDetailsViewController.chargingPark = selectedEvStation.result.chargingPark
         stationDetailsViewController.poi = selectedEvStation.result.poi
-        stationDetailsViewController.poiDetailsId = selectedEvStation.result.dataSources.poiDetails?[0].id
-        stationDetailsViewController.chargingAvailabilityId = selectedEvStation.result.dataSources.chargingAvailability.id
+        
+        if let dataSources = selectedEvStation.result.dataSources {
+            stationDetailsViewController.poiDetailsId = dataSources.poiDetails?[0].id
+            stationDetailsViewController.chargingAvailabilityId = dataSources.chargingAvailability.id
+        }
+        
         stationDetailsViewController.hidesBottomBarWhenPushed = true
     }
     
@@ -76,7 +80,7 @@ extension TableTabViewController: UITableViewDataSource {
         cell.address.text = "\(evStationLocation.result.address.streetName ?? "") \(evStationLocation.result.address.streetNumber ?? "")"
         cell.distance.text = evStationLocation.distance
         
-        if let poiDetailsId = evStationLocation.result.dataSources.poiDetails?[0].id {
+        if let poiDetailsId = evStationLocation.result.dataSources?.poiDetails?[0].id {
             FuelLoupClient.getEvStationDetails(id: poiDetailsId) { poiDetails, error in
                 guard let poiDetails = poiDetails, let photos = poiDetails.result.photos, photos.count > 0 else { return }
                 
