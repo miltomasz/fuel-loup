@@ -19,8 +19,13 @@ final class TableTabViewController: UIViewController {
     
     private let locationManager = CLLocationManager()
     private var evStationsViewModel: [ResultViewModel] {
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        return appDelegate?.evStations ?? []
+        set {
+            
+        }
+        get {
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate
+            return appDelegate?.evStations ?? []
+        }
     }
     
     // MARK: - Lifecycle

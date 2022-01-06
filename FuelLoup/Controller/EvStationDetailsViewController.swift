@@ -99,7 +99,7 @@ final class EvStationDetailsViewController: UIViewController {
             connectorsLabel.heightAnchor.constraint(equalToConstant: 40.0)
         ])
         
-        contentStackView.addArrangedSubview(connectorsLabel)
+        contentStackView.insertArrangedSubview(connectorsLabel, at: 2)
     }
     
     private func labelText(for name: UILabel, label: UILabel, text: String?) {
@@ -117,7 +117,7 @@ final class EvStationDetailsViewController: UIViewController {
             connectorView.typeValueLabel.text = connector.connectorType
             connectorView.powerValueLabel.text = "\(connector.ratedPowerKW)"
             
-            contentStackView.addArrangedSubview(connectorView)
+            contentStackView.insertArrangedSubview(connectorView, at: 3)
         }
     }
     
