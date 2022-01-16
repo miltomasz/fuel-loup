@@ -11,7 +11,7 @@ struct Result: Decodable {
     
     let id: String
     let poi: Poi
-    let address: Address
+    let address: Address?
     let position: Position
     let chargingPark: ChargingPark?
     let dataSources: DataSources?
@@ -43,13 +43,25 @@ struct Position: Decodable {
     
 }
 
-struct ChargingPark: Decodable {
+public class ChargingPark: NSObject, NSCoding, Decodable {
     
     let connectors: [Connector]
     
+    init(connectors:  [Connector]) {
+        self.connectors = connectors
+    }
+
+    public required init?(coder: NSCoder) {
+        connectors = coder.decodeObject(forKey: "connectors") as! [Connector]
+    }
+    
+    public func encode(with coder: NSCoder) {
+        coder.encode(connectors, forKey: "connectors")
+    }
+
 }
 
-struct Connector: Decodable {
+public struct Connector: Decodable, Encodable {
     
     let connectorType: String
     let ratedPowerKW: Float

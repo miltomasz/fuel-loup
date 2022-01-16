@@ -107,7 +107,7 @@ final class MapTabViewController: UIViewController {
                 annotation.chargingAvailabilityId = dataSources.chargingAvailability.id
             }
             
-            if let streetName = result.address.streetName, let streetNumber = result.address.streetNumber {
+            if let streetName = result.address?.streetName, let streetNumber = result.address?.streetNumber {
                 annotation.subtitle = "\(streetName) \(streetNumber)"
             } else {
                 annotation.subtitle = "No data loaded"

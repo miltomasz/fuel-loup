@@ -7,8 +7,14 @@
 
 import UIKit
 import CoreLocation
+import CoreData
 
 final class TableTabViewController: UIViewController {
+    
+    enum DisplayMode {
+        case regular
+        case favourites
+    }
     
     // MARK: - IB
     
@@ -18,20 +24,62 @@ final class TableTabViewController: UIViewController {
     // MARK: - Properties
     
     private let locationManager = CLLocationManager()
+    private var _evStationsViewModel: [ResultViewModel]?
     private var evStationsViewModel: [ResultViewModel] {
         set {
-            
+            _evStationsViewModel = newValue
         }
         get {
+            if let evStationsViewModel = _evStationsViewModel {
+                return evStationsViewModel
+            }
+            
             let appDelegate = UIApplication.shared.delegate as? AppDelegate
             return appDelegate?.evStations ?? []
         }
     }
     
+//    private var modelCount: Int {
+//        switch displayMode {
+//        case .regular: return evStationsViewModel.count
+//        case .favourites:
+//            return 0
+//        }
+//    }
+    
+    var displayMode: DisplayMode = .regular
+    var dataController: FuelLoupDataController?
+    
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        updateEvStationLocations()
+        
+        switch displayMode {
+        case .favourites:
+            let fetchRequest: NSFetchRequest<FavouriteStation> = FavouriteStation.fetchRequest()
+            let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
+            fetchRequest.sortDescriptors = [sortDescriptor]
+            
+            if let favoriteStations = try? dataController?.viewContext.fetch(fetchRequest) {
+                favoriteStations.forEach { station in
+                    let id = "\(station.id)"
+                    let poi = Poi(name: station.poiName ?? "unknown", phone: station.poiPhone, url: nil)
+                    let position = Position(lat: station.lat, lon: station.lng)
+                    let chargingPark = station.parks
+                    
+                    let result = Result(id: id, poi: poi, address: nil, position: position, chargingPark: chargingPark, dataSources: nil)
+                    
+                    evStationsViewModel.append(ResultViewModel(result: result, currentLocation: nil))
+                }
+            }
+        case .regular:
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate
+            evStationsViewModel = appDelegate?.evStations ?? []
+        }
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -82,7 +130,7 @@ extension TableTabViewController: UITableViewDataSource {
         let evStationName = EvStationHelper.extractStationName(from: evStationLocation.result.poi)
         
         cell.name.text = evStationName
-        cell.address.text = "\(evStationLocation.result.address.streetName ?? "") \(evStationLocation.result.address.streetNumber ?? "")"
+        cell.address.text = "\(evStationLocation.result.address?.streetName ?? "") \(evStationLocation.result.address?.streetNumber ?? "")"
         cell.distance.text = evStationLocation.distance
         
         if let poiDetailsId = evStationLocation.result.dataSources?.poiDetails?[0].id {
@@ -126,16 +174,17 @@ extension TableTabViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let coordinate = manager.location?.coordinate else { return }
         
-        NetworkHelper.showLoader(true, activityIndicator: activityIndicator)
+        for var viewModel in evStationsViewModel {
+            viewModel.currentLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        }
         
-        FuelLoupClient.getNearestEvStations(latitude: coordinate.latitude, longitude: coordinate.longitude, completion: handleStationsLocationResponse(results:error:))
+        tableView.reloadData()
     }
     
     private func handleStationsLocationResponse(results: [Result]?, error: Error?) {
         NetworkHelper.showLoader(false, activityIndicator: activityIndicator)
         
         if let results = results, !results.isEmpty {
-//            evStationLocations = results
             tableView.reloadData()
         } else {
             guard let tabBarController = tabBarController else { return }

@@ -14,9 +14,11 @@ struct ResultViewModel {
     }
     
     let result: Result
-    let currentLocation: CLLocation
+    var currentLocation: CLLocation?
     
     var distance: String {
+        guard let currentLocation = currentLocation else { return "" }
+        
         let location = CLLocation(latitude: result.position.lat, longitude: result.position.lon)
         let distance = currentLocation.distance(from: location)
         let rounded = String(format: "%.2f", distance / 1000)

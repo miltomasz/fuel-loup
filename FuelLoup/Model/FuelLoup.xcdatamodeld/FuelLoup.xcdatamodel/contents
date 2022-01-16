@@ -4,12 +4,11 @@
         <attribute name="id" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="lng" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="parks" optional="YES" attributeType="Transformable"/>
+        <attribute name="parks" optional="YES" attributeType="Transformable" valueTransformerName="JsonDataToChargingParkTransformer" customClassName="ChargingPark"/>
         <attribute name="poiName" optional="YES" attributeType="String"/>
         <attribute name="poiPhone" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="FavouriteStation" positionX="-8250.070678710938" positionY="-3692.086456298828" width="128" height="148"/>
+        <element name="FavouriteStation" positionX="-12437.00750732422" positionY="-4172.748718261719" width="128" height="133"/>
     </elements>
 </model>

@@ -19,6 +19,7 @@ final class EvStationDetailsViewController: UIViewController {
     @IBOutlet weak var contentStackView: UIStackView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var phone: UILabel!
+    @IBOutlet weak var addToFavouritesButton: UIButton!
     
     // MARK: - Properties
     
@@ -119,6 +120,16 @@ final class EvStationDetailsViewController: UIViewController {
             
             contentStackView.insertArrangedSubview(connectorView, at: 3)
         }
+    }
+
+}
+
+// MARK: - Actions
+
+extension EvStationDetailsViewController {
+    
+    @IBAction func onAddToFavouritesTap(_ button: UIButton) {
+        
     }
     
 }

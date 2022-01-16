@@ -168,6 +168,9 @@
                                                         <integer key="value" value="8"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onAddToFavouritesTap:" destination="iio-ta-swV" eventType="touchUpInside" id="6oK-U4-BZM"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="21d-Ji-2bA" userLabel="Drive to station">
                                                 <rect key="frame" x="8" y="367.5" width="398" height="40"/>
@@ -221,9 +224,10 @@
                             <constraint firstItem="ft0-lN-TcA" firstAttribute="leading" secondItem="0YD-9V-OhF" secondAttribute="leading" id="hpg-bI-eRF"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="elo" largeTitleDisplayMode="always" id="kIq-TW-T89"/>
+                    <navigationItem key="navigationItem" title="Details" largeTitleDisplayMode="always" id="kIq-TW-T89"/>
                     <connections>
                         <outlet property="activityIndicator" destination="wUZ-Nc-73X" id="lXr-IR-rUb"/>
+                        <outlet property="addToFavouritesButton" destination="P97-c4-fk8" id="ZFN-VR-qKL"/>
                         <outlet property="basicInfoView" destination="jjs-S0-0WT" id="6Py-xD-uyU"/>
                         <outlet property="contentStackView" destination="Bbz-84-tF1" id="t1i-Ul-QgZ"/>
                         <outlet property="name" destination="B6a-xC-ul3" id="Zuh-ce-gQX"/>
@@ -236,6 +240,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eBe-GN-2PA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3541" y="423"/>
+        </scene>
+        <!--Favourites View Controller-->
+        <scene sceneID="Ov5-d6-epG">
+            <objects>
+                <viewController id="6mV-X8-MLj" userLabel="Favourites View Controller" customClass="TableTabViewController" customModule="FuelLoup" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f69-7N-JKl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="KF1-tR-9HO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="NxZ-1l-R5s"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AqU-gs-XNO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4636" y="423"/>
         </scene>
         <!--List-->
         <scene sceneID="Q54-xU-Tmm">
