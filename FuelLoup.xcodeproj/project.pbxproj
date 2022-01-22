@@ -3,12 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		063452D32787B44300758973 /* FuelLoupDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063452D22787B44300758973 /* FuelLoupDataController.swift */; };
 		0634531A2790EF7D00758973 /* JsonDataToChargingParkTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063453192790EF7D00758973 /* JsonDataToChargingParkTransformer.swift */; };
+		0634531F2798C32800758973 /* Lottie.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0634531E2798C32800758973 /* Lottie.xcframework */; };
+		063453202798C32800758973 /* Lottie.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0634531E2798C32800758973 /* Lottie.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		06345327279C3A3900758973 /* added_fav.json in Resources */ = {isa = PBXBuildFile; fileRef = 06345326279C3A3900758973 /* added_fav.json */; };
 		063F9F7726B8B169006DF74F /* ResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063F9F7626B8B169006DF74F /* ResultModel.swift */; };
 		063F9F7926D2C812006DF74F /* DetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063F9F7826D2C812006DF74F /* DetailsModel.swift */; };
 		063F9F7B26D31B72006DF74F /* EvStationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063F9F7A26D31B72006DF74F /* EvStationDetailsViewController.swift */; };
@@ -41,6 +44,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				063453202798C32800758973 /* Lottie.xcframework in Embed Frameworks */,
 				06BB444826950CDE00357948 /* Alamofire.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -51,6 +55,8 @@
 /* Begin PBXFileReference section */
 		063452D22787B44300758973 /* FuelLoupDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuelLoupDataController.swift; sourceTree = "<group>"; };
 		063453192790EF7D00758973 /* JsonDataToChargingParkTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDataToChargingParkTransformer.swift; sourceTree = "<group>"; };
+		0634531E2798C32800758973 /* Lottie.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Lottie.xcframework; path = Carthage/Build/Lottie.xcframework; sourceTree = "<group>"; };
+		06345326279C3A3900758973 /* added_fav.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = added_fav.json; sourceTree = "<group>"; };
 		063F9F7626B8B169006DF74F /* ResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultModel.swift; sourceTree = "<group>"; };
 		063F9F7826D2C812006DF74F /* DetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsModel.swift; sourceTree = "<group>"; };
 		063F9F7A26D31B72006DF74F /* EvStationDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvStationDetailsViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0634531F2798C32800758973 /* Lottie.xcframework in Frameworks */,
 				06BB444726950CDE00357948 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,6 +156,7 @@
 				06BB44252693B9FA00357948 /* Main.storyboard */,
 				06BB442B2693BA0000357948 /* Assets.xcassets */,
 				06BB442D2693BA0000357948 /* LaunchScreen.storyboard */,
+				06345326279C3A3900758973 /* added_fav.json */,
 				06BB44302693BA0000357948 /* Info.plist */,
 			);
 			path = FuelLoup;
@@ -188,6 +196,7 @@
 		06BB444326950C2300357948 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0634531E2798C32800758973 /* Lottie.xcframework */,
 				06BB444426950C2400357948 /* Alamofire.framework */,
 			);
 			name = Frameworks;
@@ -255,6 +264,7 @@
 				06BB442C2693BA0000357948 /* Assets.xcassets in Resources */,
 				06BB44272693B9FA00357948 /* Main.storyboard in Resources */,
 				069959192714F22B00D90343 /* ConnectorView.xib in Resources */,
+				06345327279C3A3900758973 /* added_fav.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,6 +445,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = FuelLoup/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -458,6 +469,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = FuelLoup/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

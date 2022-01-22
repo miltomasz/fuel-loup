@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Lottie
 
 final class EvStationDetailsViewController: UIViewController {
     
@@ -20,8 +21,12 @@ final class EvStationDetailsViewController: UIViewController {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var phone: UILabel!
     @IBOutlet weak var addToFavouritesButton: UIButton!
+    @IBOutlet weak var contentStackViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var contentStackViewTrailingConstraint: NSLayoutConstraint!
     
     // MARK: - Properties
+    
+    private var animationView: AnimationView?
     
     var poi: Poi?
     var poiDetailsId: String?
@@ -37,6 +42,7 @@ final class EvStationDetailsViewController: UIViewController {
         setupBasicInfo()
         setupConnectorsLabel()
         setupChargingPark()
+        setupAddFavAnimationView()
         
         loadPhotoIfExists()
     }
@@ -121,6 +127,27 @@ final class EvStationDetailsViewController: UIViewController {
             contentStackView.insertArrangedSubview(connectorView, at: 3)
         }
     }
+    
+    private func setupAddFavAnimationView() {
+        animationView = .init(name: "added_fav")
+        
+        guard let animationView = animationView else { return }
+        
+        animationView.isHidden = true
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .playOnce
+        animationView.animationSpeed = 1
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        
+        stationImage.addSubview(animationView)
+        
+        NSLayoutConstraint.activate([
+            animationView.topAnchor.constraint(equalTo: stationImage.topAnchor),
+            animationView.trailingAnchor.constraint(equalTo: stationImage.trailingAnchor),
+            animationView.heightAnchor.constraint(equalToConstant: 50.0),
+            animationView.widthAnchor.constraint(equalToConstant: 50.0)
+        ])
+    }
 
 }
 
@@ -129,7 +156,16 @@ final class EvStationDetailsViewController: UIViewController {
 extension EvStationDetailsViewController {
     
     @IBAction func onAddToFavouritesTap(_ button: UIButton) {
-        
+        perform(#selector(self.showAddFavAnimation), with: self, afterDelay: 0.0)
     }
     
+    @objc private func showAddFavAnimation(_ sender: Any) {
+        animationView?.isHidden = false
+        animationView?.play()
+        perform(#selector(self.hideAddFavAnimation), with: self, afterDelay: 2.0)
+    }
+    
+    @objc private func hideAddFavAnimation(_ sender: Any) {
+        animationView?.isHidden = true
+    }
 }
