@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -41,7 +42,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fdl-1s-DTo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1071" y="34"/>
+            <point key="canvasLocation" x="1070" y="25"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="X5T-bg-cYv">
@@ -73,7 +74,12 @@
                             <constraint firstItem="hHd-tK-VYE" firstAttribute="top" secondItem="Ozd-uV-vzB" secondAttribute="top" id="feG-0U-IdZ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="FuelLoup" largeTitleDisplayMode="never" id="l0W-bG-B75"/>
+                    <navigationItem key="navigationItem" title="FuelLoup" largeTitleDisplayMode="never" id="l0W-bG-B75">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="KAn-Kc-zJo">
+                            <imageReference key="image" image="list-star" symbolScale="medium"/>
+                            <color key="tintColor" systemColor="systemPurpleColor"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="mcq-a9-8fl" id="lca-wM-fTH"/>
                         <outlet property="mapView" destination="hHd-tK-VYE" id="zSY-nc-wPL"/>
@@ -82,7 +88,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="801-B5-u1j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2168" y="33"/>
+            <point key="canvasLocation" x="2167" y="25"/>
         </scene>
         <!--Station Details View Controller-->
         <scene sceneID="0QA-OT-2Eh">
@@ -243,22 +249,6 @@
             </objects>
             <point key="canvasLocation" x="3541" y="423"/>
         </scene>
-        <!--Favourites View Controller-->
-        <scene sceneID="Ov5-d6-epG">
-            <objects>
-                <viewController id="6mV-X8-MLj" userLabel="Favourites View Controller" customClass="TableTabViewController" customModule="FuelLoup" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="f69-7N-JKl">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="KF1-tR-9HO"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="NxZ-1l-R5s"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AqU-gs-XNO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4636" y="423"/>
-        </scene>
         <!--List-->
         <scene sceneID="Q54-xU-Tmm">
             <objects>
@@ -373,7 +363,7 @@
                                             <outlet property="evStationimageView" destination="FNt-h4-Vww" id="3QZ-u8-09L"/>
                                             <outlet property="imageView" destination="FNt-h4-Vww" id="LB8-tv-fpF"/>
                                             <outlet property="name" destination="qWh-VV-kZq" id="0og-dM-Mmp"/>
-                                            <segue destination="iio-ta-swV" kind="show" id="swG-ZM-4Xg"/>
+                                            <segue destination="iio-ta-swV" kind="show" identifier="showStationDetails" id="swG-ZM-4Xg"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -394,21 +384,31 @@
                             <constraint firstItem="YWi-hg-cri" firstAttribute="leading" secondItem="nvf-6f-hC4" secondAttribute="leading" id="zJj-6E-vFC"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="FuelLoup" id="f3u-PD-8uM"/>
+                    <navigationItem key="navigationItem" title="FuelLoup" id="f3u-PD-8uM">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="II9-ql-cIa">
+                            <imageReference key="image" image="list-star" symbolScale="medium"/>
+                            <color key="tintColor" systemColor="systemPurpleColor"/>
+                            <connections>
+                                <segue destination="inI-S9-Xca" kind="show" identifier="showFavourites" id="tDs-iN-Oxb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="ha3-SR-bIU" id="OMh-YG-WfY"/>
+                        <outlet property="favoritesIconButton" destination="II9-ql-cIa" id="qCW-hk-3VU"/>
                         <outlet property="tableView" destination="YWi-hg-cri" id="QzJ-NM-xMx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W8Y-eC-kgn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2142.0289855072465" y="687.72321428571422"/>
+            <point key="canvasLocation" x="2149" y="719"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="swG-ZM-4Xg"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="list-star" width="13" height="11"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

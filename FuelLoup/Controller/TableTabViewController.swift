@@ -9,17 +9,25 @@ import UIKit
 import CoreLocation
 import CoreData
 
-final class TableTabViewController: UIViewController {
+final class TableTabViewController: UIViewController, DataControllerable {
+    
+    // MARK: - Configuration
     
     enum DisplayMode {
         case regular
         case favourites
     }
     
+    private enum SegueIdentifires: String {
+        case showFavourites = "showFavourites"
+        case showStationDetails = "showStationDetails"
+    }
+    
     // MARK: - IB
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var favoritesIconButton: UIBarButtonItem!
     
     // MARK: - Properties
     
@@ -39,22 +47,24 @@ final class TableTabViewController: UIViewController {
         }
     }
     
-//    private var modelCount: Int {
-//        switch displayMode {
-//        case .regular: return evStationsViewModel.count
-//        case .favourites:
-//            return 0
-//        }
-//    }
-    
+    private var _dataController: FuelLoupDataController?
+    var dataController: FuelLoupDataController? {
+        set {
+            _dataController = newValue
+        }
+        get {
+            return _dataController
+        }
+    }
     var displayMode: DisplayMode = .regular
-    var dataController: FuelLoupDataController?
-    
+
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupNavigationBar()
+        setupTableView()
         updateEvStationLocations()
         
         switch displayMode {
@@ -63,43 +73,66 @@ final class TableTabViewController: UIViewController {
             let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
             fetchRequest.sortDescriptors = [sortDescriptor]
             
-            if let favoriteStations = try? dataController?.viewContext.fetch(fetchRequest) {
-                favoriteStations.forEach { station in
-                    let id = "\(station.id)"
-                    let poi = Poi(name: station.poiName ?? "unknown", phone: station.poiPhone, url: nil)
-                    let position = Position(lat: station.lat, lon: station.lng)
-                    let chargingPark = station.parks
-                    
-                    let result = Result(id: id, poi: poi, address: nil, position: position, chargingPark: chargingPark, dataSources: nil)
-                    
-                    evStationsViewModel.append(ResultViewModel(result: result, currentLocation: nil))
-                }
+            guard let favoriteStations = try? dataController?.viewContext.fetch(fetchRequest) else { return }
+            
+            evStationsViewModel = favoriteStations.map { station -> ResultViewModel in
+                let id = station.id ?? ""
+                let poi = Poi(name: station.poiName ?? "unknown", phone: station.poiPhone, url: nil)
+                let position = Position(lat: station.lat, lon: station.lng)
+                let chargingPark = station.parks
+                let address = station.address
+                
+                let result = Result(id: id, poi: poi, address: address, position: position, chargingPark: chargingPark, dataSources: nil)
+                return ResultViewModel(result: result, currentLocation: nil)
             }
         case .regular:
             let appDelegate = UIApplication.shared.delegate as? AppDelegate
             evStationsViewModel = appDelegate?.evStations ?? []
         }
-
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let selectedIndexPathRow = tableView.indexPathForSelectedRow?.row, let stationDetailsViewController = segue.destination as? EvStationDetailsViewController else { return }
-        
-        let selectedEvStation = evStationsViewModel[selectedIndexPathRow]
-        
-        stationDetailsViewController.chargingPark = selectedEvStation.result.chargingPark
-        stationDetailsViewController.poi = selectedEvStation.result.poi
-        
-        if let dataSources = selectedEvStation.result.dataSources {
-            stationDetailsViewController.poiDetailsId = dataSources.poiDetails?[0].id
-            stationDetailsViewController.chargingAvailabilityId = dataSources.chargingAvailability.id
+        switch segue.identifier {
+        case SegueIdentifires.showFavourites.rawValue:
+            guard let favoritesViewController = segue.destination as? TableTabViewController else { return }
+            
+            favoritesViewController.displayMode = .favourites
+            favoritesViewController.dataController = dataController
+        case SegueIdentifires.showStationDetails.rawValue:
+            guard let selectedIndexPathRow = tableView.indexPathForSelectedRow?.row, let stationDetailsViewController = segue.destination as? EvStationDetailsViewController else { return }
+            
+            let selectedEvStation = evStationsViewModel[selectedIndexPathRow]
+            
+            stationDetailsViewController.chargingPark = selectedEvStation.result.chargingPark
+            stationDetailsViewController.poi = selectedEvStation.result.poi
+            stationDetailsViewController.selectedEvStation = selectedEvStation
+            stationDetailsViewController.dataController = dataController
+            
+            if let dataSources = selectedEvStation.result.dataSources {
+                stationDetailsViewController.poiDetailsId = dataSources.poiDetails?[0].id
+                stationDetailsViewController.chargingAvailabilityId = dataSources.chargingAvailability.id
+            }
+            
+            stationDetailsViewController.hidesBottomBarWhenPushed = true
+        default: break
         }
-        
-        stationDetailsViewController.hidesBottomBarWhenPushed = true
+    }
+    
+    // MARK: - Setup
+    
+    private func setupNavigationBar() {
+        switch displayMode {
+        case .favourites:
+            favoritesIconButton.isEnabled = false
+            favoritesIconButton.tintColor = UIColor.clear
+        case .regular:
+            favoritesIconButton.isEnabled = true
+            favoritesIconButton.tintColor = UIColor.systemPurple
+        }
+    }
+    
+    private func setupTableView() {
+        tableView.removeExtraCellLines()
     }
     
     private func updateEvStationLocations() {
@@ -118,6 +151,36 @@ final class TableTabViewController: UIViewController {
 // MARK: - UITableViewDataSource
 
 extension TableTabViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let favoriteStationToDelete = evStationsViewModel[indexPath.row]
+            evStationsViewModel.remove(at: indexPath.row)
+            
+            let idPredicate = NSPredicate(format: "id == %@", favoriteStationToDelete.id)
+
+            let favFetchRequest: NSFetchRequest<FavouriteStation> = FavouriteStation.fetchRequest()
+            favFetchRequest.predicate = idPredicate
+            
+            do {
+                guard let dataController = dataController else { return }
+                
+                let toDeleteFavs = try dataController.viewContext.fetch(favFetchRequest)
+                guard let favToDelete = toDeleteFavs.first else { return }
+                
+                dataController.viewContext.delete(favToDelete)
+                try dataController.viewContext.save()
+                
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            } catch {
+                debugPrint("Could not delete favorite station from core data: \(error)")
+            }
+        }
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return evStationsViewModel.count

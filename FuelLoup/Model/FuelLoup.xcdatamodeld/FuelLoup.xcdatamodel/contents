@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="FavouriteStation" representedClassName="FavouriteStation" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="address" optional="YES" attributeType="Transformable" valueTransformerName="JsonDataToAddressTransformer" customClassName="Address"/>
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="lng" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="parks" optional="YES" attributeType="Transformable" valueTransformerName="JsonDataToChargingParkTransformer" customClassName="ChargingPark"/>
@@ -9,6 +11,6 @@
         <attribute name="poiPhone" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="FavouriteStation" positionX="-12437.00750732422" positionY="-4172.748718261719" width="128" height="133"/>
+        <element name="FavouriteStation" positionX="-12437.00750732422" positionY="-4172.748718261719" width="128" height="163"/>
     </elements>
 </model>

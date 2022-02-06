@@ -20,9 +20,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         dataController.load()
         
-        guard let navigationViewController = window?.rootViewController as? UINavigationController, let tableTabViewController = navigationViewController.topViewController as? TableTabViewController else { return }
+        guard let tabBarController = window?.rootViewController as? UITabBarController,
+              let mapTabNavigationViewController = tabBarController.viewControllers?[0] as? UINavigationController,
+              var mapDataControllerableController = mapTabNavigationViewController.topViewController as? DataControllerable,
+              let tableTabNavigationViewController = tabBarController.viewControllers?[1] as? UINavigationController,
+              var tableDataControllerableController = tableTabNavigationViewController.topViewController as? DataControllerable else { return }
         
-        tableTabViewController.dataController = dataController
+        mapDataControllerableController.dataController = dataController
+        tableDataControllerableController.dataController = dataController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

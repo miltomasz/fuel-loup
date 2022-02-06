@@ -13,6 +13,10 @@ struct ResultViewModel {
         static var kilometers = "km"
     }
     
+    var id: String {
+        result.id
+    }
+    
     let result: Result
     var currentLocation: CLLocation?
     

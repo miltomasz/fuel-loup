@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class JsonDataToChargingParkTransformer: ValueTransformer {
+final class JsonDataToChargingParkTransformer: NSSecureUnarchiveFromDataTransformer {
 
     override class func transformedValueClass() -> AnyClass {
         return ChargingPark.self
@@ -18,6 +18,10 @@ class JsonDataToChargingParkTransformer: ValueTransformer {
         return true
     }
     
+    override class var allowedTopLevelClasses: [AnyClass] {
+        return [ChargingPark.self]
+    }
+    
     override func transformedValue(_ value: Any?) -> Any? {
         guard let charginPark = value as? ChargingPark else { return nil }
         
@@ -25,7 +29,7 @@ class JsonDataToChargingParkTransformer: ValueTransformer {
             let data = try NSKeyedArchiver.archivedData(withRootObject: charginPark, requiringSecureCoding: true)
             return data
         } catch {
-            assertionFailure("Failed to transform `CharginPark` to `Data`")
+            assertionFailure("Failed to transform `ChargingPark` to `Data`")
             return nil
         }
     }
@@ -34,10 +38,10 @@ class JsonDataToChargingParkTransformer: ValueTransformer {
         guard let data = value as? NSData else { return nil }
         
         do {
-            let color = try NSKeyedUnarchiver.unarchivedObject(ofClass: ChargingPark.self, from: data as Data)
-            return color
+            let chargingPark = try NSKeyedUnarchiver.unarchivedObject(ofClass: ChargingPark.self, from: data as Data)
+            return chargingPark
         } catch {
-            assertionFailure("Failed to transform `Data` to `CharginPark`")
+            assertionFailure("Failed to transform `Data` to `ChargingPark`")
             return nil
         }
     }

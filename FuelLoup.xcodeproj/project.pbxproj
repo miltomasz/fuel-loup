@@ -12,6 +12,9 @@
 		0634531F2798C32800758973 /* Lottie.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0634531E2798C32800758973 /* Lottie.xcframework */; };
 		063453202798C32800758973 /* Lottie.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0634531E2798C32800758973 /* Lottie.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		06345327279C3A3900758973 /* added_fav.json in Resources */ = {isa = PBXBuildFile; fileRef = 06345326279C3A3900758973 /* added_fav.json */; };
+		0634532B279C56F300758973 /* DataControllerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0634532A279C56F300758973 /* DataControllerable.swift */; };
+		0634532E27A6FEEA00758973 /* JsonDataToAddressTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0634532D27A6FEEA00758973 /* JsonDataToAddressTransformer.swift */; };
+		0634533027A7079700758973 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0634532F27A7079700758973 /* Extensions.swift */; };
 		063F9F7726B8B169006DF74F /* ResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063F9F7626B8B169006DF74F /* ResultModel.swift */; };
 		063F9F7926D2C812006DF74F /* DetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063F9F7826D2C812006DF74F /* DetailsModel.swift */; };
 		063F9F7B26D31B72006DF74F /* EvStationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063F9F7A26D31B72006DF74F /* EvStationDetailsViewController.swift */; };
@@ -57,6 +60,9 @@
 		063453192790EF7D00758973 /* JsonDataToChargingParkTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDataToChargingParkTransformer.swift; sourceTree = "<group>"; };
 		0634531E2798C32800758973 /* Lottie.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Lottie.xcframework; path = Carthage/Build/Lottie.xcframework; sourceTree = "<group>"; };
 		06345326279C3A3900758973 /* added_fav.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = added_fav.json; sourceTree = "<group>"; };
+		0634532A279C56F300758973 /* DataControllerable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataControllerable.swift; sourceTree = "<group>"; };
+		0634532D27A6FEEA00758973 /* JsonDataToAddressTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDataToAddressTransformer.swift; sourceTree = "<group>"; };
+		0634532F27A7079700758973 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		063F9F7626B8B169006DF74F /* ResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultModel.swift; sourceTree = "<group>"; };
 		063F9F7826D2C812006DF74F /* DetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsModel.swift; sourceTree = "<group>"; };
 		063F9F7A26D31B72006DF74F /* EvStationDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvStationDetailsViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +119,9 @@
 				064EBAAB274478C300DBBC9A /* EvStationHelper.swift */,
 				064EBAB1274ED13800DBBC9A /* LocationHelper.swift */,
 				063453192790EF7D00758973 /* JsonDataToChargingParkTransformer.swift */,
+				0634532A279C56F300758973 /* DataControllerable.swift */,
+				0634532D27A6FEEA00758973 /* JsonDataToAddressTransformer.swift */,
+				0634532F27A7079700758973 /* Extensions.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -278,11 +287,13 @@
 				0699591B2716355E00D90343 /* ConnectorView.swift in Sources */,
 				064EBAB62753F28900DBBC9A /* ResultViewModel.swift in Sources */,
 				064EBAAC274478C300DBBC9A /* EvStationHelper.swift in Sources */,
+				0634532E27A6FEEA00758973 /* JsonDataToAddressTransformer.swift in Sources */,
 				063F9F7726B8B169006DF74F /* ResultModel.swift in Sources */,
 				063F9F7B26D31B72006DF74F /* EvStationDetailsViewController.swift in Sources */,
 				06BB444B26950DE100357948 /* StationsResponse.swift in Sources */,
 				06BB445326966ECF00357948 /* NetworkHelper.swift in Sources */,
 				06BB445126966E9300357948 /* MapTabViewController.swift in Sources */,
+				0634533027A7079700758973 /* Extensions.swift in Sources */,
 				0634531A2790EF7D00758973 /* JsonDataToChargingParkTransformer.swift in Sources */,
 				064EBAA927446A4D00DBBC9A /* TableTabViewController.swift in Sources */,
 				064EBAB2274ED13800DBBC9A /* LocationHelper.swift in Sources */,
@@ -292,6 +303,7 @@
 				06BB44202693B9FA00357948 /* AppDelegate.swift in Sources */,
 				06BB444F26965C4600357948 /* FuelLoupClient.swift in Sources */,
 				063452D32787B44300758973 /* FuelLoupDataController.swift in Sources */,
+				0634532B279C56F300758973 /* DataControllerable.swift in Sources */,
 				063F9F7926D2C812006DF74F /* DetailsModel.swift in Sources */,
 				06BB44222693B9FA00357948 /* SceneDelegate.swift in Sources */,
 			);

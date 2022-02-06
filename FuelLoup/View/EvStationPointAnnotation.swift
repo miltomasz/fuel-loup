@@ -8,10 +8,8 @@
 import MapKit
 
 class EvStationPointAnnotation: MKPointAnnotation {
-    
     var poi: Poi?
     var poiDetailsId: String?
     var chargingAvailabilityId: String?
     var chargingPark: ChargingPark?
-    
 }

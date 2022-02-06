@@ -27,11 +27,20 @@ final class EvStationDetailsViewController: UIViewController {
     // MARK: - Properties
     
     private var animationView: AnimationView?
-    
+    private var _dataController: FuelLoupDataController?
     var poi: Poi?
     var poiDetailsId: String?
     var chargingAvailabilityId: String?
     var chargingPark: ChargingPark?
+    var selectedEvStation: ResultViewModel?
+    var dataController: FuelLoupDataController? {
+        set {
+            _dataController = newValue
+        }
+        get {
+            return _dataController
+        }
+    }
     
     // MARK: - Lifecycle
     
@@ -155,17 +164,44 @@ final class EvStationDetailsViewController: UIViewController {
 
 extension EvStationDetailsViewController {
     
+    // MARK: - Configuration
+    
+    private enum AnimationConfiguration {
+        static let showDelay = 0.0
+        static let hideDelay = 2.0
+    }
+    
     @IBAction func onAddToFavouritesTap(_ button: UIButton) {
-        perform(#selector(self.showAddFavAnimation), with: self, afterDelay: 0.0)
+        guard let dataController = dataController, let selectedEvStation = selectedEvStation else { return }
+        
+        let favStation = FavouriteStation(context: dataController.viewContext)
+        favStation.id = selectedEvStation.result.id
+        favStation.lat = selectedEvStation.result.position.lat
+        favStation.lng = selectedEvStation.result.position.lon
+        favStation.parks = selectedEvStation.result.chargingPark
+        favStation.poiName = selectedEvStation.result.poi.name
+        favStation.address = selectedEvStation.result.address
+        favStation.poiPhone = selectedEvStation.result.poi.phone
+        favStation.creationDate = Date()
+        
+        do {
+            try dataController.viewContext.save()
+            perform(#selector(self.showAddFavAnimation), with: self, afterDelay: AnimationConfiguration.showDelay)
+        } catch {
+            let message = "Could not save favorite station!"
+            debugPrint("\(message): \(error)")
+            NetworkHelper.showFailurePopup(title: "Error", message: message, on: self)
+        }
     }
     
     @objc private func showAddFavAnimation(_ sender: Any) {
         animationView?.isHidden = false
         animationView?.play()
-        perform(#selector(self.hideAddFavAnimation), with: self, afterDelay: 2.0)
+        perform(#selector(self.hideAddFavAnimation), with: self, afterDelay: AnimationConfiguration.hideDelay)
     }
     
     @objc private func hideAddFavAnimation(_ sender: Any) {
         animationView?.isHidden = true
     }
+    
 }

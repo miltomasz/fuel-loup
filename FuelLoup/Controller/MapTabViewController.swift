@@ -9,8 +9,8 @@ import Foundation
 import MapKit
 import CoreLocation
 
-final class MapTabViewController: UIViewController {
-    
+final class MapTabViewController: UIViewController, DataControllerable {
+
     // MARK: - IB
     
     @IBOutlet weak var mapView: MKMapView!
@@ -19,10 +19,19 @@ final class MapTabViewController: UIViewController {
     // MARK: - Properties
     
     private let locationManager = CLLocationManager()
+    private var _dataController: FuelLoupDataController?
     var poi: Poi?
     var poiDetailsId: String?
     var chargingAvailabilityId: String?
     var chargingPark: ChargingPark?
+    var dataController: FuelLoupDataController? {
+        set {
+            _dataController = newValue
+        }
+        get {
+            return _dataController
+        }
+    }
     
     // MARK: - Lifecycle
     
@@ -54,6 +63,7 @@ final class MapTabViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let stationDetailsViewController = segue.destination as? EvStationDetailsViewController else { return }
         
+        stationDetailsViewController.dataController = dataController
         stationDetailsViewController.chargingPark = chargingPark
         stationDetailsViewController.poi = poi
         stationDetailsViewController.poiDetailsId = poiDetailsId
