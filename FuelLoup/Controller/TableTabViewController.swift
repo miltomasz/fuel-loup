@@ -156,31 +156,32 @@ extension TableTabViewController: UITableViewDataSource {
         return true
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let favoriteStationToDelete = evStationsViewModel[indexPath.row]
-            evStationsViewModel.remove(at: indexPath.row)
-            
-            let idPredicate = NSPredicate(format: "id == %@", favoriteStationToDelete.id)
-
-            let favFetchRequest: NSFetchRequest<FavouriteStation> = FavouriteStation.fetchRequest()
-            favFetchRequest.predicate = idPredicate
-            
-            do {
-                guard let dataController = dataController else { return }
-                
-                let toDeleteFavs = try dataController.viewContext.fetch(favFetchRequest)
-                guard let favToDelete = toDeleteFavs.first else { return }
-                
-                dataController.viewContext.delete(favToDelete)
-                try dataController.viewContext.save()
-                
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-            } catch {
-                debugPrint("Could not delete favorite station from core data: \(error)")
-            }
-        }
-    }
+    // its not used when trailingSwipeActionsConfigurationForRowAt in UITableViewDelegate is used
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            let favoriteStationToDelete = evStationsViewModel[indexPath.row]
+//            evStationsViewModel.remove(at: indexPath.row)
+//
+//            let idPredicate = NSPredicate(format: "id == %@", favoriteStationToDelete.id)
+//
+//            let favFetchRequest: NSFetchRequest<FavouriteStation> = FavouriteStation.fetchRequest()
+//            favFetchRequest.predicate = idPredicate
+//
+//            do {
+//                guard let dataController = dataController else { return }
+//
+//                let toDeleteFavs = try dataController.viewContext.fetch(favFetchRequest)
+//                guard let favToDelete = toDeleteFavs.first else { return }
+//
+//                dataController.viewContext.delete(favToDelete)
+//                try dataController.viewContext.save()
+//
+//                tableView.deleteRows(at: [indexPath], with: .automatic)
+//            } catch {
+//                debugPrint("Could not delete favorite station from core data: \(error)")
+//            }
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return evStationsViewModel.count
@@ -222,13 +223,43 @@ extension TableTabViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 
-//extension TableTabViewController: UITableViewDelegate {
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        selectedEvStation = evStationsViewModel[indexPath.row]
-//    }
-//
-//}
+extension TableTabViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, sourceView, completionHandler) in
+            guard let self = self else { return }
+
+            let favoriteStationToDelete = self.evStationsViewModel[indexPath.row]
+            self.evStationsViewModel.remove(at: indexPath.row)
+            
+            let idPredicate = NSPredicate(format: "id == %@", favoriteStationToDelete.id)
+
+            let favFetchRequest: NSFetchRequest<FavouriteStation> = FavouriteStation.fetchRequest()
+            favFetchRequest.predicate = idPredicate
+            
+            do {
+                guard let dataController = self.dataController else { return }
+                
+                let toDeleteFavs = try dataController.viewContext.fetch(favFetchRequest)
+                guard let favToDelete = toDeleteFavs.first else { return }
+                
+                dataController.viewContext.delete(favToDelete)
+                try dataController.viewContext.save()
+                
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            } catch {
+                debugPrint("Could not delete favorite station from core data: \(error)")
+            }
+            completionHandler(true)
+        }
+        
+        delete.backgroundColor = UIColor.systemPurple
+        let swipeActionConfig = UISwipeActionsConfiguration(actions: [delete])
+        swipeActionConfig.performsFirstActionWithFullSwipe = false
+        return swipeActionConfig
+    }
+
+}
 
 // MARK: - CLLocationManagerDelegate
 

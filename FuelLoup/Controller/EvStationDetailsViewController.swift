@@ -7,6 +7,39 @@
 
 import UIKit
 import Lottie
+import CoreData
+
+fileprivate enum AddFavoritesButtonConfiguration {
+    case added
+    case notAdded
+    
+    var titleColor: UIColor {
+        switch self {
+        case .added:
+            return UIColor.systemPurple
+        case .notAdded:
+            return UIColor.white
+        }
+    }
+    
+    var color: UIColor {
+        switch self {
+        case .added:
+            return UIColor.systemGray4
+        case .notAdded:
+            return UIColor.systemYellow
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .added:
+            return "Remove from favorites"
+        case .notAdded:
+            return "Add to favorites"
+        }
+    }
+}
 
 final class EvStationDetailsViewController: UIViewController {
     
@@ -26,6 +59,7 @@ final class EvStationDetailsViewController: UIViewController {
     
     // MARK: - Properties
     
+    private var addFavoritesButtonConfiguration: AddFavoritesButtonConfiguration = .notAdded
     private var animationView: AnimationView?
     private var _dataController: FuelLoupDataController?
     var poi: Poi?
@@ -52,8 +86,9 @@ final class EvStationDetailsViewController: UIViewController {
         setupConnectorsLabel()
         setupChargingPark()
         setupAddFavAnimationView()
-        
         loadPhotoIfExists()
+        loadAddToFavoritesButtonStatus()
+        setupAddFavoritesButton()
     }
     
     private func loadPhotoIfExists() {
@@ -157,6 +192,27 @@ final class EvStationDetailsViewController: UIViewController {
             animationView.widthAnchor.constraint(equalToConstant: 50.0)
         ])
     }
+    
+    private func loadAddToFavoritesButtonStatus() {
+        guard let dataController = dataController, let selectedEvStationId = selectedEvStation?.id else { return }
+        
+        let idPredicate = NSPredicate(format: "id == %@", selectedEvStationId)
+        let favFetchRequest: NSFetchRequest<FavouriteStation> = FavouriteStation.fetchRequest()
+        favFetchRequest.predicate = idPredicate
+        
+        do {
+            let evStationFavorites = try dataController.viewContext.fetch(favFetchRequest)
+            addFavoritesButtonConfiguration = evStationFavorites.first == nil ? .notAdded : .added
+        } catch {
+            debugPrint("Could not load favorite station: \(error)")
+        }
+    }
+    
+    private func setupAddFavoritesButton() {
+        addToFavouritesButton.setTitle(addFavoritesButtonConfiguration.title, for: .normal)
+        addToFavouritesButton.backgroundColor = addFavoritesButtonConfiguration.color
+        addToFavouritesButton.setTitleColor(addFavoritesButtonConfiguration.titleColor, for: .normal)
+    }
 
 }
 
@@ -187,6 +243,8 @@ extension EvStationDetailsViewController {
         do {
             try dataController.viewContext.save()
             perform(#selector(self.showAddFavAnimation), with: self, afterDelay: AnimationConfiguration.showDelay)
+            addFavoritesButtonConfiguration = .added
+            setupAddFavoritesButton()
         } catch {
             let message = "Could not save favorite station!"
             debugPrint("\(message): \(error)")
