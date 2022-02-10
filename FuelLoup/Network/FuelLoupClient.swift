@@ -48,7 +48,7 @@ class FuelLoupClient {
         }
     }
     
-    class func getNearestEvStations(latitude: Double, longitude: Double, completion: @escaping ([Result]?, Error?) -> Void) {
+    class func getNearestEvStations(latitude: Double, longitude: Double, completion: @escaping ([ResultModel]?, Error?) -> Void) {
         AF.request(Endpoints.getNearestEvStations(latitude: latitude, longitude: longitude).url)
             .responseDecodable(of: StationsResponse.self) { response in
                 if let responseValue = response.value {

@@ -8,6 +8,9 @@
 import MapKit
 
 class EvStationPointAnnotation: MKPointAnnotation {
+    var selectedEvStationId: String?
+    var dataSources: DataSources?
+    var position: Position?
     var poi: Poi?
     var poiDetailsId: String?
     var chargingAvailabilityId: String?

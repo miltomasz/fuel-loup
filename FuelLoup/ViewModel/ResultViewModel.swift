@@ -9,16 +9,20 @@ import CoreLocation
 
 struct ResultViewModel {
     
+    // MARK: - Configuration
+    
     private enum Configuration {
         static var kilometers = "km"
     }
     
-    var id: String {
-        result.id
-    }
+    // MARK: - Properties
     
-    let result: Result
+    let result: ResultModel
     var currentLocation: CLLocation?
+    
+    var id: String {
+        return result.id
+    }
     
     var distance: String {
         guard let currentLocation = currentLocation else { return "" }
@@ -28,6 +32,14 @@ struct ResultViewModel {
         let rounded = String(format: "%.2f", distance / 1000)
         
         return "\(rounded) \(Configuration.kilometers)"
+    }
+    
+    static func create(from selectedEvStationId: String, chargingPark: ChargingPark?, position: Position?, poi: Poi?, dataSources: DataSources?) -> Self? {
+        guard let poi = poi, let position = position else { return nil }
+        
+        let resultModel = ResultModel(id: selectedEvStationId, poi: poi, address: nil, position: position, chargingPark: chargingPark, dataSources: dataSources)
+        
+        return ResultViewModel(result: resultModel, currentLocation: CLLocation(latitude: position.lat, longitude: position.lon))
     }
     
 }

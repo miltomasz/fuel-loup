@@ -38,6 +38,9 @@
 		06BB444F26965C4600357948 /* FuelLoupClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BB444E26965C4600357948 /* FuelLoupClient.swift */; };
 		06BB445126966E9300357948 /* MapTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BB445026966E9300357948 /* MapTabViewController.swift */; };
 		06BB445326966ECF00357948 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BB445226966ECF00357948 /* NetworkHelper.swift */; };
+		06CBC1BF27B32523003C22C0 /* AddFavoritesButtonConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CBC1BE27B32523003C22C0 /* AddFavoritesButtonConfiguration.swift */; };
+		06CBC1C127B332ED003C22C0 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CBC1C027B332ED003C22C0 /* CoreDataHelper.swift */; };
+		06CBC1C327B48608003C22C0 /* SegueIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CBC1C227B48608003C22C0 /* SegueIdentifiers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -87,6 +90,9 @@
 		06BB444E26965C4600357948 /* FuelLoupClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuelLoupClient.swift; sourceTree = "<group>"; };
 		06BB445026966E9300357948 /* MapTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabViewController.swift; sourceTree = "<group>"; };
 		06BB445226966ECF00357948 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
+		06CBC1BE27B32523003C22C0 /* AddFavoritesButtonConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFavoritesButtonConfiguration.swift; sourceTree = "<group>"; };
+		06CBC1C027B332ED003C22C0 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		06CBC1C227B48608003C22C0 /* SegueIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueIdentifiers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +128,9 @@
 				0634532A279C56F300758973 /* DataControllerable.swift */,
 				0634532D27A6FEEA00758973 /* JsonDataToAddressTransformer.swift */,
 				0634532F27A7079700758973 /* Extensions.swift */,
+				06CBC1BE27B32523003C22C0 /* AddFavoritesButtonConfiguration.swift */,
+				06CBC1C027B332ED003C22C0 /* CoreDataHelper.swift */,
+				06CBC1C227B48608003C22C0 /* SegueIdentifiers.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -284,6 +293,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06CBC1C327B48608003C22C0 /* SegueIdentifiers.swift in Sources */,
 				0699591B2716355E00D90343 /* ConnectorView.swift in Sources */,
 				064EBAB62753F28900DBBC9A /* ResultViewModel.swift in Sources */,
 				064EBAAC274478C300DBBC9A /* EvStationHelper.swift in Sources */,
@@ -302,6 +312,8 @@
 				063F9F7E26E033BA006DF74F /* EvStationPointAnnotation.swift in Sources */,
 				06BB44202693B9FA00357948 /* AppDelegate.swift in Sources */,
 				06BB444F26965C4600357948 /* FuelLoupClient.swift in Sources */,
+				06CBC1C127B332ED003C22C0 /* CoreDataHelper.swift in Sources */,
+				06CBC1BF27B32523003C22C0 /* AddFavoritesButtonConfiguration.swift in Sources */,
 				063452D32787B44300758973 /* FuelLoupDataController.swift in Sources */,
 				0634532B279C56F300758973 /* DataControllerable.swift in Sources */,
 				063F9F7926D2C812006DF74F /* DetailsModel.swift in Sources */,

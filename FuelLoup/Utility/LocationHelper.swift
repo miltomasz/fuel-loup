@@ -9,7 +9,7 @@ import CoreLocation
 
 struct LocationHelper {
     
-    static var distanceSorting: ((CLLocation, Result, Result) throws -> Bool) = { currentLocation, res1, res2 in
+    static var distanceSorting: ((CLLocation, ResultModel, ResultModel) throws -> Bool) = { currentLocation, res1, res2 in
         let loc1 = CLLocation(latitude: res1.position.lat, longitude: res1.position.lon)
         let loc2 = CLLocation(latitude: res2.position.lat, longitude: res2.position.lon)
         

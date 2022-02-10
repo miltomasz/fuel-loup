@@ -9,6 +9,6 @@ import Foundation
 
 struct StationsResponse: Decodable {
     
-    let results: [Result]
+    let results: [ResultModel]
     
 }

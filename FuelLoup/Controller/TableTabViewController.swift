@@ -18,11 +18,6 @@ final class TableTabViewController: UIViewController, DataControllerable {
         case favourites
     }
     
-    private enum SegueIdentifires: String {
-        case showFavourites = "showFavourites"
-        case showStationDetails = "showStationDetails"
-    }
-    
     // MARK: - IB
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -82,7 +77,7 @@ final class TableTabViewController: UIViewController, DataControllerable {
                 let chargingPark = station.parks
                 let address = station.address
                 
-                let result = Result(id: id, poi: poi, address: address, position: position, chargingPark: chargingPark, dataSources: nil)
+                let result = ResultModel(id: id, poi: poi, address: address, position: position, chargingPark: chargingPark, dataSources: nil)
                 return ResultViewModel(result: result, currentLocation: nil)
             }
         case .regular:
@@ -93,7 +88,7 @@ final class TableTabViewController: UIViewController, DataControllerable {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
-        case SegueIdentifires.showFavourites.rawValue:
+        case SegueIdentifires.showFavorites.rawValue:
             guard let favoritesViewController = segue.destination as? TableTabViewController else { return }
             
             favoritesViewController.displayMode = .favourites
@@ -107,6 +102,7 @@ final class TableTabViewController: UIViewController, DataControllerable {
             stationDetailsViewController.poi = selectedEvStation.result.poi
             stationDetailsViewController.selectedEvStation = selectedEvStation
             stationDetailsViewController.dataController = dataController
+            stationDetailsViewController.tableViewRefreshDelegate = self
             
             if let dataSources = selectedEvStation.result.dataSources {
                 stationDetailsViewController.poiDetailsId = dataSources.poiDetails?[0].id
@@ -146,6 +142,36 @@ final class TableTabViewController: UIViewController, DataControllerable {
          }
     }
 
+}
+
+// MARK: - TableViewRefreshDelegate
+
+extension TableTabViewController: TableViewRefreshDelegate {
+    
+    func refreshTable() {
+        switch displayMode {
+        case .favourites:
+            let fetchRequest: NSFetchRequest<FavouriteStation> = FavouriteStation.fetchRequest()
+            let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
+            fetchRequest.sortDescriptors = [sortDescriptor]
+            
+            guard let favoriteStations = try? dataController?.viewContext.fetch(fetchRequest) else { return }
+            
+            evStationsViewModel = favoriteStations.map { station -> ResultViewModel in
+                let id = station.id ?? ""
+                let poi = Poi(name: station.poiName ?? "unknown", phone: station.poiPhone, url: nil)
+                let position = Position(lat: station.lat, lon: station.lng)
+                let chargingPark = station.parks
+                let address = station.address
+                
+                let result = ResultModel(id: id, poi: poi, address: address, position: position, chargingPark: chargingPark, dataSources: nil)
+                return ResultViewModel(result: result, currentLocation: nil)
+            }
+            tableView.reloadData()
+        case .regular: break
+        }
+    }
+    
 }
 
 // MARK: - UITableViewDataSource
@@ -275,7 +301,7 @@ extension TableTabViewController: CLLocationManagerDelegate {
         tableView.reloadData()
     }
     
-    private func handleStationsLocationResponse(results: [Result]?, error: Error?) {
+    private func handleStationsLocationResponse(results: [ResultModel]?, error: Error?) {
         NetworkHelper.showLoader(false, activityIndicator: activityIndicator)
         
         if let results = results, !results.isEmpty {

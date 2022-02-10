@@ -20,6 +20,10 @@ final class MapTabViewController: UIViewController, DataControllerable {
     
     private let locationManager = CLLocationManager()
     private var _dataController: FuelLoupDataController?
+    
+    var selectedEvStationId: String?
+    var position: Position?
+    var dataSources: DataSources?
     var poi: Poi?
     var poiDetailsId: String?
     var chargingAvailabilityId: String?
@@ -61,17 +65,30 @@ final class MapTabViewController: UIViewController, DataControllerable {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let stationDetailsViewController = segue.destination as? EvStationDetailsViewController else { return }
-        
-        stationDetailsViewController.dataController = dataController
-        stationDetailsViewController.chargingPark = chargingPark
-        stationDetailsViewController.poi = poi
-        stationDetailsViewController.poiDetailsId = poiDetailsId
-        stationDetailsViewController.chargingAvailabilityId = chargingAvailabilityId
-        stationDetailsViewController.hidesBottomBarWhenPushed = true
+        switch segue.identifier {
+        case SegueIdentifires.showFavorites.rawValue:
+            guard let favoritesViewController = segue.destination as? TableTabViewController else { return }
+            
+            favoritesViewController.displayMode = .favourites
+            favoritesViewController.dataController = dataController
+        case SegueIdentifires.showStationDetails.rawValue:
+            guard let stationDetailsViewController = segue.destination as? EvStationDetailsViewController else { return }
+            
+            stationDetailsViewController.dataController = dataController
+            stationDetailsViewController.chargingPark = chargingPark
+            stationDetailsViewController.poi = poi
+            stationDetailsViewController.poiDetailsId = poiDetailsId
+            stationDetailsViewController.chargingAvailabilityId = chargingAvailabilityId
+            stationDetailsViewController.hidesBottomBarWhenPushed = true
+            
+            guard let selectedEvStationId = selectedEvStationId else { return }
+            
+            stationDetailsViewController.selectedEvStation = ResultViewModel.create(from: selectedEvStationId, chargingPark: chargingPark, position: position, poi: poi, dataSources: dataSources)
+        default: break
+        }
     }
     
-    private func handleStationsLocationResponse(results: [Result]?, error: Error?) {
+    private func handleStationsLocationResponse(results: [ResultModel]?, error: Error?) {
         NetworkHelper.showLoader(false, activityIndicator: activityIndicator)
         
         if let results = results, !results.isEmpty {
@@ -86,7 +103,7 @@ final class MapTabViewController: UIViewController, DataControllerable {
     
     // MARK: - Setup
     
-    private func setupAnnotations(results: [Result]) {
+    private func setupAnnotations(results: [ResultModel]) {
         mapView.removeAnnotations(mapView.annotations)
         
         let annotations = createAnnotations(for: results)
@@ -94,7 +111,7 @@ final class MapTabViewController: UIViewController, DataControllerable {
         mapView.addAnnotations(annotations)
     }
     
-    private func createAnnotations(for collection: [Result]) -> [MKPointAnnotation] {
+    private func createAnnotations(for collection: [ResultModel]) -> [MKPointAnnotation] {
         var annotations = [MKPointAnnotation]()
         
         for result in collection {
@@ -106,6 +123,9 @@ final class MapTabViewController: UIViewController, DataControllerable {
             let annotation = EvStationPointAnnotation()
             annotation.coordinate = coordinate
             annotation.poi = result.poi
+            annotation.selectedEvStationId = result.id
+            annotation.dataSources = result.dataSources
+            annotation.position = result.position
             
             if let chargingPark = result.chargingPark {
                 annotation.title = chargingPark.connectors.compactMap { $0.connectorType }.joined(separator: ", ")
@@ -129,7 +149,7 @@ final class MapTabViewController: UIViewController, DataControllerable {
         return annotations
     }
     
-    private func setupTableTabViewModel(results: [Result]) {
+    private func setupTableTabViewModel(results: [ResultModel]) {
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         guard let currentLocation = locationManager.location else { return }
         
@@ -139,6 +159,7 @@ final class MapTabViewController: UIViewController, DataControllerable {
             do {
                 return try LocationHelper.distanceSorting(currentLocation, rvm1.result, rvm2.result)
             } catch {
+                debugPrint("Could not sort results: \(error)")
                 return false
             }
         })
@@ -184,6 +205,9 @@ extension MapTabViewController: MKMapViewDelegate {
         if control == view.rightCalloutAccessoryView {
             guard let annotation = view.annotation as? EvStationPointAnnotation else { return }
             
+            selectedEvStationId = annotation.selectedEvStationId
+            dataSources = annotation.dataSources
+            position = annotation.position
             poi = annotation.poi
             poiDetailsId = annotation.poiDetailsId
             chargingAvailabilityId = annotation.chargingAvailabilityId

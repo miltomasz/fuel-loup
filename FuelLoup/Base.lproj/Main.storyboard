@@ -78,6 +78,9 @@
                         <barButtonItem key="rightBarButtonItem" title="Item" id="KAn-Kc-zJo">
                             <imageReference key="image" image="list-star" symbolScale="medium"/>
                             <color key="tintColor" systemColor="systemPurpleColor"/>
+                            <connections>
+                                <segue destination="inI-S9-Xca" kind="show" identifier="showFavorites" id="YTz-tl-03R"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -88,7 +91,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="801-B5-u1j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2167" y="25"/>
+            <point key="canvasLocation" x="2226" y="-182"/>
         </scene>
         <!--Station Details View Controller-->
         <scene sceneID="0QA-OT-2Eh">
@@ -389,7 +392,7 @@
                             <imageReference key="image" image="list-star" symbolScale="medium"/>
                             <color key="tintColor" systemColor="systemPurpleColor"/>
                             <connections>
-                                <segue destination="inI-S9-Xca" kind="show" identifier="showFavourites" id="tDs-iN-Oxb"/>
+                                <segue destination="inI-S9-Xca" kind="show" identifier="showFavorites" id="tDs-iN-Oxb"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -405,6 +408,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="YTz-tl-03R"/>
         <segue reference="swG-ZM-4Xg"/>
     </inferredMetricsTieBreakers>
     <resources>

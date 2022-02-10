@@ -9,36 +9,8 @@ import UIKit
 import Lottie
 import CoreData
 
-fileprivate enum AddFavoritesButtonConfiguration {
-    case added
-    case notAdded
-    
-    var titleColor: UIColor {
-        switch self {
-        case .added:
-            return UIColor.systemPurple
-        case .notAdded:
-            return UIColor.white
-        }
-    }
-    
-    var color: UIColor {
-        switch self {
-        case .added:
-            return UIColor.systemGray4
-        case .notAdded:
-            return UIColor.systemYellow
-        }
-    }
-    
-    var title: String {
-        switch self {
-        case .added:
-            return "Remove from favorites"
-        case .notAdded:
-            return "Add to favorites"
-        }
-    }
+protocol TableViewRefreshDelegate: AnyObject {
+    func refreshTable()
 }
 
 final class EvStationDetailsViewController: UIViewController {
@@ -75,6 +47,7 @@ final class EvStationDetailsViewController: UIViewController {
             return _dataController
         }
     }
+    weak var tableViewRefreshDelegate: TableViewRefreshDelegate?
     
     // MARK: - Lifecycle
     
@@ -230,26 +203,47 @@ extension EvStationDetailsViewController {
     @IBAction func onAddToFavouritesTap(_ button: UIButton) {
         guard let dataController = dataController, let selectedEvStation = selectedEvStation else { return }
         
-        let favStation = FavouriteStation(context: dataController.viewContext)
-        favStation.id = selectedEvStation.result.id
-        favStation.lat = selectedEvStation.result.position.lat
-        favStation.lng = selectedEvStation.result.position.lon
-        favStation.parks = selectedEvStation.result.chargingPark
-        favStation.poiName = selectedEvStation.result.poi.name
-        favStation.address = selectedEvStation.result.address
-        favStation.poiPhone = selectedEvStation.result.poi.phone
-        favStation.creationDate = Date()
-        
-        do {
-            try dataController.viewContext.save()
-            perform(#selector(self.showAddFavAnimation), with: self, afterDelay: AnimationConfiguration.showDelay)
-            addFavoritesButtonConfiguration = .added
-            setupAddFavoritesButton()
-        } catch {
-            let message = "Could not save favorite station!"
-            debugPrint("\(message): \(error)")
-            NetworkHelper.showFailurePopup(title: "Error", message: message, on: self)
+        switch addFavoritesButtonConfiguration {
+        case .added:
+            let idPredicate = NSPredicate(format: "id == %@", selectedEvStation.id)
+            let favFetchRequest: NSFetchRequest<FavouriteStation> = FavouriteStation.fetchRequest()
+            favFetchRequest.predicate = idPredicate
+            
+            do {
+                let toDeleteFavs = try dataController.viewContext.fetch(favFetchRequest)
+                guard let favToDelete = toDeleteFavs.first else { return }
+                
+                dataController.viewContext.delete(favToDelete)
+                try dataController.viewContext.save()
+                addFavoritesButtonConfiguration = .notAdded
+                setupAddFavoritesButton()
+            } catch {
+                debugPrint("Could not delete favorite station from core data: \(error)")
+            }
+        case .notAdded:
+            let favStation = FavouriteStation(context: dataController.viewContext)
+            favStation.id = selectedEvStation.result.id
+            favStation.lat = selectedEvStation.result.position.lat
+            favStation.lng = selectedEvStation.result.position.lon
+            favStation.parks = selectedEvStation.result.chargingPark
+            favStation.poiName = selectedEvStation.result.poi.name
+            favStation.address = selectedEvStation.result.address
+            favStation.poiPhone = selectedEvStation.result.poi.phone
+            favStation.creationDate = Date()
+            
+            do {
+                try dataController.viewContext.save()
+                perform(#selector(self.showAddFavAnimation), with: self, afterDelay: AnimationConfiguration.showDelay)
+                addFavoritesButtonConfiguration = .added
+                setupAddFavoritesButton()
+            } catch {
+                let message = "Could not save favorite station to core data: \(error)"
+                debugPrint("\(message): \(error)")
+                NetworkHelper.showFailurePopup(title: "Error", message: message, on: self)
+            }
         }
+        
+        tableViewRefreshDelegate?.refreshTable()
     }
     
     @objc private func showAddFavAnimation(_ sender: Any) {

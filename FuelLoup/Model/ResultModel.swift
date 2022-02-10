@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Result: Decodable {
+struct ResultModel: Decodable {
     let id: String
     let poi: Poi
     let address: Address?
