@@ -12,7 +12,7 @@
 		0634531F2798C32800758973 /* Lottie.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0634531E2798C32800758973 /* Lottie.xcframework */; };
 		063453202798C32800758973 /* Lottie.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0634531E2798C32800758973 /* Lottie.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		06345327279C3A3900758973 /* added_fav.json in Resources */ = {isa = PBXBuildFile; fileRef = 06345326279C3A3900758973 /* added_fav.json */; };
-		0634532B279C56F300758973 /* DataControllerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0634532A279C56F300758973 /* DataControllerable.swift */; };
+		0634532B279C56F300758973 /* DataControllerAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0634532A279C56F300758973 /* DataControllerAware.swift */; };
 		0634532E27A6FEEA00758973 /* JsonDataToAddressTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0634532D27A6FEEA00758973 /* JsonDataToAddressTransformer.swift */; };
 		0634533027A7079700758973 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0634532F27A7079700758973 /* Extensions.swift */; };
 		063F9F7726B8B169006DF74F /* ResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063F9F7626B8B169006DF74F /* ResultModel.swift */; };
@@ -39,7 +39,6 @@
 		06BB445126966E9300357948 /* MapTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BB445026966E9300357948 /* MapTabViewController.swift */; };
 		06BB445326966ECF00357948 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BB445226966ECF00357948 /* NetworkHelper.swift */; };
 		06CBC1BF27B32523003C22C0 /* AddFavoritesButtonConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CBC1BE27B32523003C22C0 /* AddFavoritesButtonConfiguration.swift */; };
-		06CBC1C127B332ED003C22C0 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CBC1C027B332ED003C22C0 /* CoreDataHelper.swift */; };
 		06CBC1C327B48608003C22C0 /* SegueIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CBC1C227B48608003C22C0 /* SegueIdentifiers.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,7 +62,7 @@
 		063453192790EF7D00758973 /* JsonDataToChargingParkTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDataToChargingParkTransformer.swift; sourceTree = "<group>"; };
 		0634531E2798C32800758973 /* Lottie.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Lottie.xcframework; path = Carthage/Build/Lottie.xcframework; sourceTree = "<group>"; };
 		06345326279C3A3900758973 /* added_fav.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = added_fav.json; sourceTree = "<group>"; };
-		0634532A279C56F300758973 /* DataControllerable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataControllerable.swift; sourceTree = "<group>"; };
+		0634532A279C56F300758973 /* DataControllerAware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataControllerAware.swift; sourceTree = "<group>"; };
 		0634532D27A6FEEA00758973 /* JsonDataToAddressTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDataToAddressTransformer.swift; sourceTree = "<group>"; };
 		0634532F27A7079700758973 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		063F9F7626B8B169006DF74F /* ResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultModel.swift; sourceTree = "<group>"; };
@@ -91,7 +90,6 @@
 		06BB445026966E9300357948 /* MapTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabViewController.swift; sourceTree = "<group>"; };
 		06BB445226966ECF00357948 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		06CBC1BE27B32523003C22C0 /* AddFavoritesButtonConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFavoritesButtonConfiguration.swift; sourceTree = "<group>"; };
-		06CBC1C027B332ED003C22C0 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		06CBC1C227B48608003C22C0 /* SegueIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueIdentifiers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,11 +123,10 @@
 				064EBAAB274478C300DBBC9A /* EvStationHelper.swift */,
 				064EBAB1274ED13800DBBC9A /* LocationHelper.swift */,
 				063453192790EF7D00758973 /* JsonDataToChargingParkTransformer.swift */,
-				0634532A279C56F300758973 /* DataControllerable.swift */,
+				0634532A279C56F300758973 /* DataControllerAware.swift */,
 				0634532D27A6FEEA00758973 /* JsonDataToAddressTransformer.swift */,
 				0634532F27A7079700758973 /* Extensions.swift */,
 				06CBC1BE27B32523003C22C0 /* AddFavoritesButtonConfiguration.swift */,
-				06CBC1C027B332ED003C22C0 /* CoreDataHelper.swift */,
 				06CBC1C227B48608003C22C0 /* SegueIdentifiers.swift */,
 			);
 			path = Utility;
@@ -183,11 +180,11 @@
 		06BB44372693BF6700357948 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				063452D22787B44300758973 /* FuelLoupDataController.swift */,
 				06BB44282693B9FA00357948 /* FuelLoup.xcdatamodeld */,
 				06BB444A26950DE100357948 /* StationsResponse.swift */,
 				063F9F7626B8B169006DF74F /* ResultModel.swift */,
 				063F9F7826D2C812006DF74F /* DetailsModel.swift */,
-				063452D22787B44300758973 /* FuelLoupDataController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -312,10 +309,9 @@
 				063F9F7E26E033BA006DF74F /* EvStationPointAnnotation.swift in Sources */,
 				06BB44202693B9FA00357948 /* AppDelegate.swift in Sources */,
 				06BB444F26965C4600357948 /* FuelLoupClient.swift in Sources */,
-				06CBC1C127B332ED003C22C0 /* CoreDataHelper.swift in Sources */,
 				06CBC1BF27B32523003C22C0 /* AddFavoritesButtonConfiguration.swift in Sources */,
 				063452D32787B44300758973 /* FuelLoupDataController.swift in Sources */,
-				0634532B279C56F300758973 /* DataControllerable.swift in Sources */,
+				0634532B279C56F300758973 /* DataControllerAware.swift in Sources */,
 				063F9F7926D2C812006DF74F /* DetailsModel.swift in Sources */,
 				06BB44222693B9FA00357948 /* SceneDelegate.swift in Sources */,
 			);

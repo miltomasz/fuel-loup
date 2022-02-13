@@ -10,7 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    let dataController = FuelLoupDataController(modelName: "FuelLoup")
+    private let dataController = FuelLoupDataController(modelName: "FuelLoup")
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -22,12 +22,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let tabBarController = window?.rootViewController as? UITabBarController,
               let mapTabNavigationViewController = tabBarController.viewControllers?[0] as? UINavigationController,
-              var mapDataControllerableController = mapTabNavigationViewController.topViewController as? DataControllerable,
+              var mapDataControllerAwareController = mapTabNavigationViewController.topViewController as? DataControllerAware,
               let tableTabNavigationViewController = tabBarController.viewControllers?[1] as? UINavigationController,
-              var tableDataControllerableController = tableTabNavigationViewController.topViewController as? DataControllerable else { return }
+              var tableDataControllerAwareController = tableTabNavigationViewController.topViewController as? DataControllerAware else { return }
         
-        mapDataControllerableController.dataController = dataController
-        tableDataControllerableController.dataController = dataController
+        mapDataControllerAwareController.dataController = dataController
+        tableDataControllerAwareController.dataController = dataController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -60,7 +60,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Save changes in the application's managed object context when the application transitions to the background.
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
-
 
 }
 

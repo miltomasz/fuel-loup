@@ -8,6 +8,6 @@
 import Foundation
 import CoreData
 
-protocol DataControllerable {
+protocol DataControllerAware {
     var dataController: FuelLoupDataController? { set get }
 }

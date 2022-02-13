@@ -9,7 +9,7 @@ import Foundation
 import MapKit
 import CoreLocation
 
-final class MapTabViewController: UIViewController, DataControllerable {
+final class MapTabViewController: UIViewController, DataControllerAware {
 
     // MARK: - IB
     

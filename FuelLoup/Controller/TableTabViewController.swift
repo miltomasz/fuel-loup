@@ -9,7 +9,7 @@ import UIKit
 import CoreLocation
 import CoreData
 
-final class TableTabViewController: UIViewController, DataControllerable {
+final class TableTabViewController: UIViewController, DataControllerAware {
     
     // MARK: - Configuration
     
@@ -254,27 +254,17 @@ extension TableTabViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, sourceView, completionHandler) in
             guard let self = self else { return }
-
+            
             let favoriteStationToDelete = self.evStationsViewModel[indexPath.row]
-            self.evStationsViewModel.remove(at: indexPath.row)
             
-            let idPredicate = NSPredicate(format: "id == %@", favoriteStationToDelete.id)
-
-            let favFetchRequest: NSFetchRequest<FavouriteStation> = FavouriteStation.fetchRequest()
-            favFetchRequest.predicate = idPredicate
-            
-            do {
-                guard let dataController = self.dataController else { return }
-                
-                let toDeleteFavs = try dataController.viewContext.fetch(favFetchRequest)
-                guard let favToDelete = toDeleteFavs.first else { return }
-                
-                dataController.viewContext.delete(favToDelete)
-                try dataController.viewContext.save()
-                
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-            } catch {
-                debugPrint("Could not delete favorite station from core data: \(error)")
+            self.dataController?.delete(favoriteStationToDelete) { result in
+                switch result {
+                case .success:
+                    self.evStationsViewModel.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                case .failure:
+                    NetworkHelper.showFailurePopup(title: "Error", message: "Could not delete favorite station", on: self)
+                }
             }
             completionHandler(true)
         }
