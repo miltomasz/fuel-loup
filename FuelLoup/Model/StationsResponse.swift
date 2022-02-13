@@ -8,7 +8,5 @@
 import Foundation
 
 struct StationsResponse: Decodable {
-    
     let results: [ResultModel]
-    
 }

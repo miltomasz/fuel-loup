@@ -8,6 +8,7 @@
 import UIKit
 import Lottie
 import CoreData
+import MapKit
 
 protocol TableViewRefreshDelegate: AnyObject {
     func refreshTable()
@@ -17,6 +18,7 @@ final class EvStationDetailsViewController: UIViewController {
     
     // MARK: - IB
     
+    @IBOutlet weak var driveToStationButton: UIButton!
     @IBOutlet weak var stationImage: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -198,6 +200,36 @@ extension EvStationDetailsViewController {
     private enum AnimationConfiguration {
         static let showDelay = 0.0
         static let hideDelay = 2.0
+    }
+    
+    @IBAction func driveToStation(_ button: UIButton) {
+        guard let selectedEvStation = self.selectedEvStation else { return }
+        
+        let latitude = selectedEvStation.result.position.lat
+        let longitude = selectedEvStation.result.position.lon
+        let url = URL(string: "comgooglemaps://?daddr=\(latitude),\(longitude)&directionsmode=driving&zoom=14&views=traffic")
+        
+        if let googleMapUrl = url, UIApplication.shared.canOpenURL(googleMapUrl) {
+            let actionSheet = UIAlertController(title: "Open Location", message: "Choose an app to open direction", preferredStyle: .actionSheet)
+            actionSheet.addAction(UIAlertAction(title: "Google Maps", style: .default, handler: { _ in
+                UIApplication.shared.open(googleMapUrl, options: [:], completionHandler: nil)
+            }))
+            actionSheet.addAction(UIAlertAction(title: "Apple Maps", style: .default, handler: { _ in
+                let coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+                let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary: nil))
+                mapItem.name = "Destination"
+                mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
+            }))
+            
+            actionSheet.popoverPresentationController?.sourceView = driveToStationButton
+            actionSheet.popoverPresentationController?.sourceRect = driveToStationButton.bounds
+            actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        } else {
+            let coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+            let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary: nil))
+            mapItem.name = "Destination"
+            mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
+        }
     }
     
     @IBAction func onAddToFavouritesTap(_ button: UIButton) {

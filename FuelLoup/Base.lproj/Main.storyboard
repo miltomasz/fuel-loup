@@ -195,6 +195,9 @@
                                                         <integer key="value" value="8"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="driveToStation:" destination="iio-ta-swV" eventType="touchUpInside" id="6DA-jT-mKT"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -241,6 +244,7 @@
                         <outlet property="contentStackView" destination="Bbz-84-tF1" id="t1i-Ul-QgZ"/>
                         <outlet property="contentStackViewTopConstraint" destination="QfM-pR-NYJ" id="P7y-UR-tZi"/>
                         <outlet property="contentStackViewTrailingConstraint" destination="q0d-8a-5NJ" id="VkK-9i-8xY"/>
+                        <outlet property="driveToStationButton" destination="21d-Ji-2bA" id="tok-pN-bNs"/>
                         <outlet property="name" destination="B6a-xC-ul3" id="Zuh-ce-gQX"/>
                         <outlet property="nameLabel" destination="cUA-98-dkJ" id="DHq-0V-xKU"/>
                         <outlet property="phone" destination="wJz-ke-5RH" id="x3E-zD-y1k"/>
