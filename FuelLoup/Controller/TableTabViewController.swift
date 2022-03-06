@@ -93,6 +93,7 @@ final class TableTabViewController: UIViewController, DataControllerAware {
             
             favoritesViewController.displayMode = .favourites
             favoritesViewController.dataController = dataController
+            favoritesViewController.hidesBottomBarWhenPushed = true
         case SegueIdentifires.showStationDetails.rawValue:
             guard let selectedIndexPathRow = tableView.indexPathForSelectedRow?.row, let stationDetailsViewController = segue.destination as? EvStationDetailsViewController else { return }
             
@@ -121,9 +122,10 @@ final class TableTabViewController: UIViewController, DataControllerAware {
         case .favourites:
             favoritesIconButton.isEnabled = false
             favoritesIconButton.tintColor = UIColor.clear
+            title = "Favourites"
         case .regular:
             favoritesIconButton.isEnabled = true
-            favoritesIconButton.tintColor = UIColor.systemPurple
+            favoritesIconButton.tintColor = UIColor.white
         }
     }
     

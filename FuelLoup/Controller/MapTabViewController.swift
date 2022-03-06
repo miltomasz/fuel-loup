@@ -20,6 +20,7 @@ final class MapTabViewController: UIViewController, DataControllerAware {
     
     private let locationManager = CLLocationManager()
     private var _dataController: FuelLoupDataController?
+    private let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     
     var selectedEvStationId: String?
     var position: Position?
@@ -41,7 +42,7 @@ final class MapTabViewController: UIViewController, DataControllerAware {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        addMapOverlay()
         mapView.delegate = self
     }
     
@@ -71,6 +72,7 @@ final class MapTabViewController: UIViewController, DataControllerAware {
             
             favoritesViewController.displayMode = .favourites
             favoritesViewController.dataController = dataController
+            favoritesViewController.hidesBottomBarWhenPushed = true
         case SegueIdentifires.showStationDetails.rawValue:
             guard let stationDetailsViewController = segue.destination as? EvStationDetailsViewController else { return }
             
@@ -128,7 +130,7 @@ final class MapTabViewController: UIViewController, DataControllerAware {
             annotation.position = result.position
             
             if let chargingPark = result.chargingPark {
-                annotation.title = chargingPark.connectors.compactMap { $0.connectorType }.joined(separator: ", ")
+                annotation.title = result.poi.name
                 annotation.chargingPark = result.chargingPark
             }
             
@@ -140,7 +142,7 @@ final class MapTabViewController: UIViewController, DataControllerAware {
             if let streetName = result.address?.streetName, let streetNumber = result.address?.streetNumber {
                 annotation.subtitle = "\(streetName) \(streetNumber)"
             } else {
-                annotation.subtitle = "No data loaded"
+                annotation.subtitle = "No data available"
             }
             
             annotations.append(annotation)
@@ -172,23 +174,23 @@ final class MapTabViewController: UIViewController, DataControllerAware {
 extension MapTabViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard !(annotation is MKUserLocation) else { return nil }
+        if annotation is MKUserLocation { return nil }
         
-        let annotationIdentifier = "identifier"
+        let annotationIdentifier = "fuelLoupAnnotationIdentifier"
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier)
         
         if annotationView == nil {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+            annotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)//MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
             
-            let moreIcon = UIImage(named: "more-info-icon")
-            let rightButton = UIButton(type: .infoLight)
-            rightButton.setImage(moreIcon, for: .normal)
-            rightButton.imageView?.contentMode = .scaleAspectFill
-            rightButton.tag = annotation.hash
-            rightButton.addTarget(self, action: #selector(onTap(sender:)), for: .touchUpInside)
+//            let moreIcon = UIImage(named: "more-info-icon")
+//            let rightButton = UIButton(type: .infoLight)
+//            rightButton.setImage(moreIcon, for: .normal)
+//            rightButton.imageView?.contentMode = .scaleAspectFill
+//            rightButton.tag = annotation.hash
+            //rightButton.addTarget(self, action: #selector(onTap(sender:)), for: .touchUpInside)
             
-            annotationView?.canShowCallout = true
-            annotationView?.rightCalloutAccessoryView = rightButton
+//            annotationView?.canShowCallout = true
+            //annotationView?.rightCalloutAccessoryView = rightButton
         }
         
         annotationView?.annotation = annotation
@@ -197,29 +199,76 @@ extension MapTabViewController: MKMapViewDelegate {
         return annotationView
     }
     
-    @objc func onTap(sender: AnyObject) {
-        
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+//        if control == view.rightCalloutAccessoryView {
+//            guard let annotation = view.annotation as? EvStationPointAnnotation else { return }
+//
+//            selectedEvStationId = annotation.selectedEvStationId
+//            dataSources = annotation.dataSources
+//            position = annotation.position
+//            poi = annotation.poi
+//            poiDetailsId = annotation.poiDetailsId
+//            chargingAvailabilityId = annotation.chargingAvailabilityId
+//            chargingPark = annotation.chargingPark
+//
+//            let selectedAnnotations = mapView.selectedAnnotations
+//            for annotation in selectedAnnotations {
+//                mapView.deselectAnnotation(annotation, animated: false)
+//            }
+//
+//            performSegue(withIdentifier: "showStationDetails", sender: nil)
+//        }
+        print("mapView(_:annotationView:calloutAccessoryControlTapped)")
     }
     
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        if control == view.rightCalloutAccessoryView {
-            guard let annotation = view.annotation as? EvStationPointAnnotation else { return }
-            
-            selectedEvStationId = annotation.selectedEvStationId
-            dataSources = annotation.dataSources
-            position = annotation.position
-            poi = annotation.poi
-            poiDetailsId = annotation.poiDetailsId
-            chargingAvailabilityId = annotation.chargingAvailabilityId
-            chargingPark = annotation.chargingPark
-            
-            let selectedAnnotations = mapView.selectedAnnotations
-            for annotation in selectedAnnotations {
-                mapView.deselectAnnotation(annotation, animated: false)
-            }
-            
-            performSegue(withIdentifier: "showStationDetails", sender: nil)
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard let coordinate = view.annotation?.coordinate else { return }
+        
+        let region = MKCoordinateRegion(center: coordinate, span: span)
+        
+        mapView.setRegion(region, animated: true)
+    }
+    
+    // MARK: Map overlay
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        guard let tileOverlay = overlay as? MKTileOverlay else {
+            return MKOverlayRenderer(overlay: overlay)
         }
+        return MKTileOverlayRenderer(tileOverlay: tileOverlay)
+    }
+    
+    private func addMapOverlay() {
+        let overlayURL = "https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png"
+        let overlay = MKTileOverlay(urlTemplate: overlayURL)
+        overlay.canReplaceMapContent = true
+        
+        mapView.addOverlay(overlay)
+    }
+    
+}
+
+// MARK: - ExampleCalloutViewDelegate
+
+extension MapTabViewController: ExampleCalloutViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, didTapDetailsButton button: UIButton, for annotation: MKAnnotation) {
+        guard let annotation = annotation as? EvStationPointAnnotation else { return }
+
+        selectedEvStationId = annotation.selectedEvStationId
+        dataSources = annotation.dataSources
+        position = annotation.position
+        poi = annotation.poi
+        poiDetailsId = annotation.poiDetailsId
+        chargingAvailabilityId = annotation.chargingAvailabilityId
+        chargingPark = annotation.chargingPark
+
+        let selectedAnnotations = mapView.selectedAnnotations
+        for annotation in selectedAnnotations {
+            mapView.deselectAnnotation(annotation, animated: false)
+        }
+
+        performSegue(withIdentifier: "showStationDetails", sender: nil)
     }
     
 }
@@ -231,7 +280,6 @@ extension MapTabViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let coordinate = manager.location?.coordinate else { return }
 
-        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         let region = MKCoordinateRegion(center: coordinate, span: span)
         
         mapView.setRegion(region, animated: true)

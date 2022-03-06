@@ -40,6 +40,10 @@
 		06BB445326966ECF00357948 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BB445226966ECF00357948 /* NetworkHelper.swift */; };
 		06CBC1BF27B32523003C22C0 /* AddFavoritesButtonConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CBC1BE27B32523003C22C0 /* AddFavoritesButtonConfiguration.swift */; };
 		06CBC1C327B48608003C22C0 /* SegueIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CBC1C227B48608003C22C0 /* SegueIdentifiers.swift */; };
+		06CBC1C527C12842003C22C0 /* FuelLoupAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CBC1C427C12842003C22C0 /* FuelLoupAnnotationView.swift */; };
+		06CBC1C827C2B4B6003C22C0 /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CBC1C727C2B4B6003C22C0 /* CustomAnnotationView.swift */; };
+		06CBC1CA27C2B4DC003C22C0 /* CalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CBC1C927C2B4DC003C22C0 /* CalloutView.swift */; };
+		06CBC1CC27C2BEC5003C22C0 /* ExampleCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CBC1CB27C2BEC5003C22C0 /* ExampleCalloutView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -91,6 +95,10 @@
 		06BB445226966ECF00357948 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		06CBC1BE27B32523003C22C0 /* AddFavoritesButtonConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFavoritesButtonConfiguration.swift; sourceTree = "<group>"; };
 		06CBC1C227B48608003C22C0 /* SegueIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueIdentifiers.swift; sourceTree = "<group>"; };
+		06CBC1C427C12842003C22C0 /* FuelLoupAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuelLoupAnnotationView.swift; sourceTree = "<group>"; };
+		06CBC1C727C2B4B6003C22C0 /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
+		06CBC1C927C2B4DC003C22C0 /* CalloutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalloutView.swift; sourceTree = "<group>"; };
+		06CBC1CB27C2BEC5003C22C0 /* ExampleCalloutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCalloutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,10 +117,12 @@
 		063F9F7C26E0338A006DF74F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				06CBC1C627C2B484003C22C0 /* CustomCallout */,
 				069959182714F22B00D90343 /* ConnectorView.xib */,
 				063F9F7D26E033BA006DF74F /* EvStationPointAnnotation.swift */,
 				0699591A2716355E00D90343 /* ConnectorView.swift */,
 				064EBAAD2745C60300DBBC9A /* EvStationLocationCell.swift */,
+				06CBC1C427C12842003C22C0 /* FuelLoupAnnotationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -217,6 +227,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		06CBC1C627C2B484003C22C0 /* CustomCallout */ = {
+			isa = PBXGroup;
+			children = (
+				06CBC1C727C2B4B6003C22C0 /* CustomAnnotationView.swift */,
+				06CBC1C927C2B4DC003C22C0 /* CalloutView.swift */,
+				06CBC1CB27C2BEC5003C22C0 /* ExampleCalloutView.swift */,
+			);
+			path = CustomCallout;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -298,10 +318,13 @@
 				063F9F7726B8B169006DF74F /* ResultModel.swift in Sources */,
 				063F9F7B26D31B72006DF74F /* EvStationDetailsViewController.swift in Sources */,
 				06BB444B26950DE100357948 /* StationsResponse.swift in Sources */,
+				06CBC1C827C2B4B6003C22C0 /* CustomAnnotationView.swift in Sources */,
+				06CBC1C527C12842003C22C0 /* FuelLoupAnnotationView.swift in Sources */,
 				06BB445326966ECF00357948 /* NetworkHelper.swift in Sources */,
 				06BB445126966E9300357948 /* MapTabViewController.swift in Sources */,
 				0634533027A7079700758973 /* Extensions.swift in Sources */,
 				0634531A2790EF7D00758973 /* JsonDataToChargingParkTransformer.swift in Sources */,
+				06CBC1CA27C2B4DC003C22C0 /* CalloutView.swift in Sources */,
 				064EBAA927446A4D00DBBC9A /* TableTabViewController.swift in Sources */,
 				064EBAB2274ED13800DBBC9A /* LocationHelper.swift in Sources */,
 				064EBAAE2745C60300DBBC9A /* EvStationLocationCell.swift in Sources */,
@@ -309,6 +332,7 @@
 				063F9F7E26E033BA006DF74F /* EvStationPointAnnotation.swift in Sources */,
 				06BB44202693B9FA00357948 /* AppDelegate.swift in Sources */,
 				06BB444F26965C4600357948 /* FuelLoupClient.swift in Sources */,
+				06CBC1CC27C2BEC5003C22C0 /* ExampleCalloutView.swift in Sources */,
 				06CBC1BF27B32523003C22C0 /* AddFavoritesButtonConfiguration.swift in Sources */,
 				063452D32787B44300758973 /* FuelLoupDataController.swift in Sources */,
 				0634532B279C56F300758973 /* DataControllerAware.swift in Sources */,

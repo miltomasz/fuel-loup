@@ -17,6 +17,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" systemColor="systemPurpleColor"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="unselectedItemTintColor">
+                                <color key="value" white="0.85546810977108834" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="pnw-sQ-r0X" kind="relationship" relationship="viewControllers" id="cJf-96-e4v"/>
@@ -27,14 +37,19 @@
             </objects>
             <point key="canvasLocation" x="-49" y="222"/>
         </scene>
-        <!--Map-->
+        <!--Navigation Controller-->
         <scene sceneID="U0a-do-kdd">
             <objects>
                 <navigationController id="pnw-sQ-r0X" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" id="yiU-QI-2SC"/>
+                    <tabBarItem key="tabBarItem" title="" image="map" catalog="system" id="yiU-QI-2SC"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="UFC-yH-rBP">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" systemColor="systemPurpleColor"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="SQF-QM-AnY" kind="relationship" relationship="rootViewController" id="H2A-gG-tyF"/>
@@ -75,9 +90,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="FuelLoup" largeTitleDisplayMode="never" id="l0W-bG-B75">
+                        <barButtonItem key="backBarButtonItem" title=" " id="6k9-9x-GAL"/>
                         <barButtonItem key="rightBarButtonItem" title="Item" id="KAn-Kc-zJo">
-                            <imageReference key="image" image="list-star" symbolScale="medium"/>
-                            <color key="tintColor" systemColor="systemPurpleColor"/>
+                            <imageReference key="image" image="star.fill" catalog="system" symbolScale="medium"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="inI-S9-Xca" kind="show" identifier="showFavorites" id="YTz-tl-03R"/>
                             </connections>
@@ -236,7 +252,9 @@
                             <constraint firstItem="ft0-lN-TcA" firstAttribute="leading" secondItem="0YD-9V-OhF" secondAttribute="leading" id="hpg-bI-eRF"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Details" largeTitleDisplayMode="always" id="kIq-TW-T89"/>
+                    <navigationItem key="navigationItem" title="Details" largeTitleDisplayMode="always" id="kIq-TW-T89">
+                        <barButtonItem key="backBarButtonItem" title=" " id="UEB-Iz-R7O"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="wUZ-Nc-73X" id="lXr-IR-rUb"/>
                         <outlet property="addToFavouritesButton" destination="P97-c4-fk8" id="ZFN-VR-qKL"/>
@@ -256,14 +274,19 @@
             </objects>
             <point key="canvasLocation" x="3541" y="423"/>
         </scene>
-        <!--List-->
+        <!--Navigation Controller-->
         <scene sceneID="Q54-xU-Tmm">
             <objects>
                 <navigationController id="k3x-ik-arj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="List" id="EUD-wW-HGE"/>
+                    <tabBarItem key="tabBarItem" title="" image="list.bullet" catalog="system" id="EUD-wW-HGE"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="GHg-0w-VVW">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" systemColor="systemPurpleColor"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="inI-S9-Xca" kind="relationship" relationship="rootViewController" id="hID-Ug-89h"/>
@@ -392,9 +415,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="FuelLoup" id="f3u-PD-8uM">
+                        <barButtonItem key="backBarButtonItem" title=" " id="hJI-CP-hb4"/>
                         <barButtonItem key="rightBarButtonItem" title="Item" id="II9-ql-cIa">
-                            <imageReference key="image" image="list-star" symbolScale="medium"/>
-                            <color key="tintColor" systemColor="systemPurpleColor"/>
+                            <imageReference key="image" image="star.fill" catalog="system" symbolScale="medium"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="inI-S9-Xca" kind="show" identifier="showFavorites" id="tDs-iN-Oxb"/>
                             </connections>
@@ -416,7 +440,9 @@
         <segue reference="swG-ZM-4Xg"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="list-star" width="13" height="11"/>
+        <image name="list.bullet" catalog="system" width="128" height="88"/>
+        <image name="map" catalog="system" width="128" height="110"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
