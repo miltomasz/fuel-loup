@@ -1,15 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "electric-car-32.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "default-station.jpg",
+      "filename" : "electric-car-257.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "electric-car-256.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

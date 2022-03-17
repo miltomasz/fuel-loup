@@ -180,45 +180,14 @@ extension MapTabViewController: MKMapViewDelegate {
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier)
         
         if annotationView == nil {
-            annotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)//MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-            
-//            let moreIcon = UIImage(named: "more-info-icon")
-//            let rightButton = UIButton(type: .infoLight)
-//            rightButton.setImage(moreIcon, for: .normal)
-//            rightButton.imageView?.contentMode = .scaleAspectFill
-//            rightButton.tag = annotation.hash
-            //rightButton.addTarget(self, action: #selector(onTap(sender:)), for: .touchUpInside)
-            
-//            annotationView?.canShowCallout = true
-            //annotationView?.rightCalloutAccessoryView = rightButton
+            annotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
         }
         
         annotationView?.annotation = annotation
         annotationView?.image = UIImage(named: "charging-station-icon")
+        annotationView?.frame.size = CGSize(width: 48, height: 48)
         
         return annotationView
-    }
-    
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-//        if control == view.rightCalloutAccessoryView {
-//            guard let annotation = view.annotation as? EvStationPointAnnotation else { return }
-//
-//            selectedEvStationId = annotation.selectedEvStationId
-//            dataSources = annotation.dataSources
-//            position = annotation.position
-//            poi = annotation.poi
-//            poiDetailsId = annotation.poiDetailsId
-//            chargingAvailabilityId = annotation.chargingAvailabilityId
-//            chargingPark = annotation.chargingPark
-//
-//            let selectedAnnotations = mapView.selectedAnnotations
-//            for annotation in selectedAnnotations {
-//                mapView.deselectAnnotation(annotation, animated: false)
-//            }
-//
-//            performSegue(withIdentifier: "showStationDetails", sender: nil)
-//        }
-        print("mapView(_:annotationView:calloutAccessoryControlTapped)")
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {

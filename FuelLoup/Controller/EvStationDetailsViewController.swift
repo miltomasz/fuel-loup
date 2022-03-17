@@ -16,6 +16,12 @@ protocol TableViewRefreshDelegate: AnyObject {
 
 final class EvStationDetailsViewController: UIViewController {
     
+    // MARK: - Configuration
+    
+    private enum Configuration {
+        static let defaultStationImage = UIImage(named: "default-station-icon")
+    }
+    
     // MARK: - IB
     
     @IBOutlet weak var driveToStationButton: UIButton!
@@ -34,7 +40,7 @@ final class EvStationDetailsViewController: UIViewController {
     // MARK: - Properties
     
     private var addFavoritesButtonConfiguration: AddFavoritesButtonConfiguration = .notAdded
-    private var animationView: AnimationView?
+    private var animationView: AnimationView = .init(name: "added_fav")
     private var _dataController: FuelLoupDataController?
     var poi: Poi?
     var poiDetailsId: String?
@@ -71,8 +77,7 @@ final class EvStationDetailsViewController: UIViewController {
             NetworkHelper.showLoader(true, activityIndicator: activityIndicator)
             FuelLoupClient.getEvStationDetails(id: poiDetailsId, completion: handleStationDetailsResponse(details:error:))
         } else {
-            stationImage.image = UIImage(named: "default-station-icon")
-            stationImage.contentMode = .scaleAspectFill
+            setupDefaultStationImage()
         }
     }
     
@@ -89,13 +94,11 @@ final class EvStationDetailsViewController: UIViewController {
     private func handlePhotoResponse(image: UIImage?, error: Error?) {
         NetworkHelper.showLoader(false, activityIndicator: activityIndicator)
         
-        guard let image = image else {
-            stationImage.image = UIImage(named: "default-station-icon")
-            stationImage.contentMode = .scaleAspectFill
-            return
+        if let image = image {
+            stationImage.image = image
+        } else {
+            setupDefaultStationImage()
         }
-        
-        stationImage.image = image
     }
     
     // MARK: - Setup layout
@@ -148,10 +151,6 @@ final class EvStationDetailsViewController: UIViewController {
     }
     
     private func setupAddFavAnimationView() {
-        animationView = .init(name: "added_fav")
-        
-        guard let animationView = animationView else { return }
-        
         animationView.isHidden = true
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .playOnce
@@ -168,6 +167,19 @@ final class EvStationDetailsViewController: UIViewController {
         ])
     }
     
+    private func setupDefaultStationImage() {
+        stationImage.image = Configuration.defaultStationImage
+        stationImage.contentMode = .scaleAspectFit
+    }
+    
+    private func setupAddFavoritesButton() {
+        addToFavouritesButton.setTitle(addFavoritesButtonConfiguration.title, for: .normal)
+        addToFavouritesButton.backgroundColor = addFavoritesButtonConfiguration.color
+        addToFavouritesButton.setTitleColor(addFavoritesButtonConfiguration.titleColor, for: .normal)
+    }
+    
+    // MARK: - Load data from Core Data
+    
     private func loadAddToFavoritesButtonStatus() {
         guard let dataController = dataController, let selectedEvStationId = selectedEvStation?.id else { return }
         
@@ -181,12 +193,6 @@ final class EvStationDetailsViewController: UIViewController {
         } catch {
             debugPrint("Could not load favorite station: \(error)")
         }
-    }
-    
-    private func setupAddFavoritesButton() {
-        addToFavouritesButton.setTitle(addFavoritesButtonConfiguration.title, for: .normal)
-        addToFavouritesButton.backgroundColor = addFavoritesButtonConfiguration.color
-        addToFavouritesButton.setTitleColor(addFavoritesButtonConfiguration.titleColor, for: .normal)
     }
 
 }
@@ -267,13 +273,13 @@ extension EvStationDetailsViewController {
     }
     
     @objc private func showAddFavAnimation(_ sender: Any) {
-        animationView?.isHidden = false
-        animationView?.play()
+        animationView.isHidden = false
+        animationView.play()
         perform(#selector(self.hideAddFavAnimation), with: self, afterDelay: AnimationConfiguration.hideDelay)
     }
     
     @objc private func hideAddFavAnimation(_ sender: Any) {
-        animationView?.isHidden = true
+        animationView.isHidden = true
     }
     
 }
