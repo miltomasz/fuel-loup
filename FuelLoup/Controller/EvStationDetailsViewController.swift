@@ -150,6 +150,16 @@ final class EvStationDetailsViewController: UIViewController {
         }
     }
     
+    private func prepareType(_ connector: Connector) -> String {
+        let connectorType = connector.connectorType
+        if let range: Range<String.Index> = connectorType.range(of: "Type2") {
+            let index: Int = connectorType.distance(from: connectorType.startIndex, to: range.lowerBound)
+            return ""
+        }
+        
+        return ""
+    }
+    
     private func setupAddFavAnimationView() {
         animationView.isHidden = true
         animationView.contentMode = .scaleAspectFit
@@ -230,6 +240,7 @@ extension EvStationDetailsViewController {
             actionSheet.popoverPresentationController?.sourceView = driveToStationButton
             actionSheet.popoverPresentationController?.sourceRect = driveToStationButton.bounds
             actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            present(actionSheet, animated: true, completion: nil)
         } else {
             let coordinate = CLLocationCoordinate2DMake(latitude, longitude)
             let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary: nil))

@@ -44,10 +44,6 @@ final class MapTabViewController: UIViewController, DataControllerAware {
         super.viewDidLoad()
         addMapOverlay()
         mapView.delegate = self
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         
         locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
@@ -57,6 +53,10 @@ final class MapTabViewController: UIViewController, DataControllerAware {
              locationManager.desiredAccuracy = kCLLocationAccuracyBest
              locationManager.startUpdatingLocation()
          }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -92,6 +92,8 @@ final class MapTabViewController: UIViewController, DataControllerAware {
     
     private func handleStationsLocationResponse(results: [ResultModel]?, error: Error?) {
         NetworkHelper.showLoader(false, activityIndicator: activityIndicator)
+        
+        locationManager.stopUpdatingLocation()
         
         if let results = results, !results.isEmpty {
             setupTableTabViewModel(results: results)
