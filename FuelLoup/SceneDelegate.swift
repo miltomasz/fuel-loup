@@ -26,6 +26,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             proxy.tintColor = .white
             proxy.standardAppearance = appearance
             proxy.scrollEdgeAppearance = appearance
+        } else {
+            let appearance = UINavigationBar.appearance()
+            appearance.tintColor = .white
+            appearance.barTintColor = .systemPurple
+            appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         }
 
         guard let _ = (scene as? UIWindowScene) else { return }

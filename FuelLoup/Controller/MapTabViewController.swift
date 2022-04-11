@@ -28,6 +28,7 @@ final class MapTabViewController: UIViewController, DataControllerAware {
     var poi: Poi?
     var poiDetailsId: String?
     var chargingAvailabilityId: String?
+    var address: Address?
     var chargingPark: ChargingPark?
     var dataController: FuelLoupDataController? {
         set {
@@ -85,7 +86,7 @@ final class MapTabViewController: UIViewController, DataControllerAware {
             
             guard let selectedEvStationId = selectedEvStationId else { return }
             
-            stationDetailsViewController.selectedEvStation = ResultViewModel.create(from: selectedEvStationId, chargingPark: chargingPark, position: position, poi: poi, dataSources: dataSources)
+            stationDetailsViewController.selectedEvStation = ResultViewModel.create(from: selectedEvStationId, address: address, chargingPark: chargingPark, position: position, poi: poi, dataSources: dataSources)
         default: break
         }
     }
@@ -130,6 +131,7 @@ final class MapTabViewController: UIViewController, DataControllerAware {
             annotation.selectedEvStationId = result.id
             annotation.dataSources = result.dataSources
             annotation.position = result.position
+            annotation.address = result.address
             
             if let chargingPark = result.chargingPark {
                 annotation.title = result.poi.name
@@ -174,7 +176,6 @@ final class MapTabViewController: UIViewController, DataControllerAware {
 // MARK: - MKMapViewDelegate
 
 extension MapTabViewController: MKMapViewDelegate {
-    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation { return nil }
         
@@ -206,6 +207,7 @@ extension MapTabViewController: MKMapViewDelegate {
         guard let tileOverlay = overlay as? MKTileOverlay else {
             return MKOverlayRenderer(overlay: overlay)
         }
+        
         return MKTileOverlayRenderer(tileOverlay: tileOverlay)
     }
     
@@ -216,13 +218,11 @@ extension MapTabViewController: MKMapViewDelegate {
         
         mapView.addOverlay(overlay)
     }
-    
 }
 
 // MARK: - ExampleCalloutViewDelegate
 
 extension MapTabViewController: ExampleCalloutViewDelegate {
-    
     func mapView(_ mapView: MKMapView, didTapDetailsButton button: UIButton, for annotation: MKAnnotation) {
         guard let annotation = annotation as? EvStationPointAnnotation else { return }
 
@@ -233,7 +233,8 @@ extension MapTabViewController: ExampleCalloutViewDelegate {
         poiDetailsId = annotation.poiDetailsId
         chargingAvailabilityId = annotation.chargingAvailabilityId
         chargingPark = annotation.chargingPark
-
+        address = annotation.address
+        
         let selectedAnnotations = mapView.selectedAnnotations
         for annotation in selectedAnnotations {
             mapView.deselectAnnotation(annotation, animated: false)
@@ -241,7 +242,6 @@ extension MapTabViewController: ExampleCalloutViewDelegate {
 
         performSegue(withIdentifier: "showStationDetails", sender: nil)
     }
-    
 }
 
 // MARK: - CLLocationManagerDelegate

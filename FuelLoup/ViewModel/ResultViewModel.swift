@@ -34,10 +34,10 @@ struct ResultViewModel {
         return "\(rounded) \(Configuration.kilometers)"
     }
     
-    static func create(from selectedEvStationId: String, chargingPark: ChargingPark?, position: Position?, poi: Poi?, dataSources: DataSources?) -> Self? {
+    static func create(from selectedEvStationId: String, address: Address?, chargingPark: ChargingPark?, position: Position?, poi: Poi?, dataSources: DataSources?) -> Self? {
         guard let poi = poi, let position = position else { return nil }
         
-        let resultModel = ResultModel(id: selectedEvStationId, poi: poi, address: nil, position: position, chargingPark: chargingPark, dataSources: dataSources)
+        let resultModel = ResultModel(id: selectedEvStationId, poi: poi, address: address, position: position, chargingPark: chargingPark, dataSources: dataSources)
         
         return ResultViewModel(result: resultModel, currentLocation: CLLocation(latitude: position.lat, longitude: position.lon))
     }

@@ -65,11 +65,43 @@ final class EvStationDetailsViewController: UIViewController {
         setupTitle()
         setupBasicInfo()
         setupConnectorsLabel()
-        setupChargingPark()
         setupAddFavAnimationView()
         loadPhotoIfExists()
         loadAddToFavoritesButtonStatus()
+        loadAvailability()
         setupAddFavoritesButton()
+    }
+    
+    private func loadAvailability() {
+        if let chargingAvailabilityId = chargingAvailabilityId {
+            NetworkHelper.showLoader(true, activityIndicator: activityIndicator)
+            FuelLoupClient.getChargingStationAvailability(availabilityId: chargingAvailabilityId, completion: handleAvailabilityResponse(availability:error:))
+        } else {
+            NetworkHelper.showLoader(false, activityIndicator: activityIndicator)
+            setupChargingPark()
+        }
+    }
+    
+    private func handleAvailabilityResponse(availability: ChargingStationAvailability?, error: Error?) {
+        NetworkHelper.showLoader(false, activityIndicator: activityIndicator)
+        
+        guard
+            let availability = availability,
+                availability.connectors.count > 0,
+            let powerLevel = availability.connectors.first,
+                powerLevel.hasPowerLevels else {
+                setupChargingPark()
+                return
+            }
+        
+        availability.connectors.forEach { connector in
+            let connectorView = ConnectorView()
+            connectorView.typeValueLabel.text = prepareType(for: connector.type ?? "")
+            let powerLevelInfo = connector.perPowerLevel?.compactMap { $0.info }
+            connectorView.powerValueLabel.text = powerLevelInfo?.joined(separator: " ")
+            
+            contentStackView.insertArrangedSubview(connectorView, at: 3)
+        }
     }
     
     private func loadPhotoIfExists() {
@@ -143,21 +175,19 @@ final class EvStationDetailsViewController: UIViewController {
     private func setupChargingPark() {
         chargingPark?.connectors.forEach { connector in
             let connectorView = ConnectorView()
-            connectorView.typeValueLabel.text = connector.connectorType
+            connectorView.typeValueLabel.text = prepareType(for: connector.connectorType)
             connectorView.powerValueLabel.text = "\(connector.ratedPowerKW)"
             
             contentStackView.insertArrangedSubview(connectorView, at: 3)
         }
     }
     
-    private func prepareType(_ connector: Connector) -> String {
-        let connectorType = connector.connectorType
-        if let range: Range<String.Index> = connectorType.range(of: "Type2") {
-            let index: Int = connectorType.distance(from: connectorType.startIndex, to: range.lowerBound)
-            return ""
-        }
+    private func prepareType(for connectorType: String) -> String {
+        var types: Array = connectorType.components(separatedBy: "Type2")
+        guard types.count > 0 else { return connectorType }
         
-        return ""
+        types.append("Type2")
+        return types.joined(separator: ", ")
     }
     
     private func setupAddFavAnimationView() {

@@ -9,13 +9,30 @@ import Foundation
 
 struct ChargingStationAvailability: Decodable {
     let chargingAvailability: String
-    let connectors: [Connector]
+    let connectors: [ChargingAvailabilityConnector]
+}
+
+struct ChargingAvailabilityConnector: Decodable {
+    let type: String?
+    let perPowerLevel: [PerPowerLevel]?
+    
+    var hasPowerLevels: Bool {
+        if let perPowerLevel = perPowerLevel, !perPowerLevel.isEmpty {
+            return true
+        }
+        return false
+    }
 }
 
 struct PerPowerLevel: Decodable {
     let powerKW: Double
     let available: Bool
     let outOfService: Bool
+    
+    var info: String {
+        let availableIcon = available ? "\u{1F7E2}" : "\u{1F534}"
+        return "\(powerKW)" + availableIcon
+    }
 }
 
 struct PoiDetails: Decodable {

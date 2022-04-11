@@ -15,4 +15,5 @@ class EvStationPointAnnotation: MKPointAnnotation {
     var poiDetailsId: String?
     var chargingAvailabilityId: String?
     var chargingPark: ChargingPark?
+    var address: Address?
 }

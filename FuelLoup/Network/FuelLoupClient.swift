@@ -27,10 +27,12 @@ class FuelLoupClient {
         static let baseSearchUrl = "https://api.tomtom.com/search/2/nearbySearch/.json"
         static let poiDetailsUrl = "https://api.tomtom.com/search/2/poiDetails.json"
         static let photoUrl = "https://api.tomtom.com/search/2/poiPhoto"
+        static let chargingStationAvailabilityUrl = "https://api.tomtom.com/search/2/chargingAvailability.json"
         
         case getNearestEvStations(latitude: Double, longitude: Double)
         case getEvStationDetails(id: String)
         case getPhoto(id: String)
+        case getAvailability(availabilityId: String)
         
         var stringValue: String {
             switch self {
@@ -40,6 +42,8 @@ class FuelLoupClient {
                 return Endpoints.poiDetailsUrl + "?key=\(Auth.ttKey)&id=\(id)"
             case .getPhoto(id: let id):
                 return Endpoints.photoUrl + "?key=\(Auth.ttKey)&id=\(id)"
+            case .getAvailability(let availabilityId):
+                return Endpoints.chargingStationAvailabilityUrl + "?key=\(Auth.ttKey)&chargingAvailability=\(availabilityId)"
             }
         }
         
@@ -80,8 +84,14 @@ class FuelLoupClient {
         }
     }
     
-    class func getChargingStationAvailability() {
-        
+    class func getChargingStationAvailability(availabilityId: String, completion: @escaping (ChargingStationAvailability?, Error?) -> Void) {
+        AF.request(Endpoints.getAvailability(availabilityId: availabilityId).url).responseDecodable(of: ChargingStationAvailability.self) { response in
+            if let stationAvailability = response.value {
+                completion(stationAvailability, nil)
+            } else {
+                completion(nil, response.error)
+            }
+        }
     }
     
 }
