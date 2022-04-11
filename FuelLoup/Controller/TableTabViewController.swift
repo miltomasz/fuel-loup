@@ -225,31 +225,33 @@ extension TableTabViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 
 extension TableTabViewController: UITableViewDelegate {
-
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, sourceView, completionHandler) in
-            guard let self = self else { return }
-            
-            let favoriteStationToDelete = self.evStationsViewModel[indexPath.row]
-            
-            self.dataController?.delete(favoriteStationToDelete) { result in
-                switch result {
-                case .success:
-                    self.evStationsViewModel.remove(at: indexPath.row)
-                    tableView.deleteRows(at: [indexPath], with: .automatic)
-                case .failure:
-                    NetworkHelper.showFailurePopup(title: "Error", message: "Could not delete favorite station", on: self)
+        switch displayMode {
+        case .favourites:
+            let delete = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, sourceView, completionHandler) in
+                guard let self = self else { return }
+                
+                let favoriteStationToDelete = self.evStationsViewModel[indexPath.row]
+                
+                self.dataController?.delete(favoriteStationToDelete) { result in
+                    switch result {
+                    case .success:
+                        self.evStationsViewModel.remove(at: indexPath.row)
+                        tableView.deleteRows(at: [indexPath], with: .automatic)
+                    case .failure:
+                        NetworkHelper.showFailurePopup(title: "Error", message: "Could not delete favorite station", on: self)
+                    }
                 }
+                completionHandler(true)
             }
-            completionHandler(true)
+            
+            delete.backgroundColor = UIColor.systemPurple
+            let swipeActionConfig = UISwipeActionsConfiguration(actions: [delete])
+            swipeActionConfig.performsFirstActionWithFullSwipe = false
+            return swipeActionConfig
+        case .regular: return nil
         }
-        
-        delete.backgroundColor = UIColor.systemPurple
-        let swipeActionConfig = UISwipeActionsConfiguration(actions: [delete])
-        swipeActionConfig.performsFirstActionWithFullSwipe = false
-        return swipeActionConfig
     }
-
 }
 
 // MARK: - CLLocationManagerDelegate
