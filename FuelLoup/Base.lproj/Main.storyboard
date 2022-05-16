@@ -92,13 +92,22 @@
                     </view>
                     <navigationItem key="navigationItem" title="FuelLoup" largeTitleDisplayMode="never" id="l0W-bG-B75">
                         <barButtonItem key="backBarButtonItem" title=" " id="6k9-9x-GAL"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="KAn-Kc-zJo">
-                            <imageReference key="image" image="star.fill" catalog="system" symbolScale="medium"/>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <segue destination="inI-S9-Xca" kind="show" identifier="showFavorites" id="YTz-tl-03R"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" id="KAn-Kc-zJo">
+                                <imageReference key="image" image="star.fill" catalog="system" symbolScale="medium"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <segue destination="inI-S9-Xca" kind="show" identifier="showFavorites" id="YTz-tl-03R"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem id="lTr-qc-BaX">
+                                <imageReference key="image" image="mappin.circle.fill" catalog="system" symbolScale="medium"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <segue destination="3EI-AN-B84" kind="presentation" identifier="showMapSettings" id="pdB-Qg-fDO"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="mcq-a9-8fl" id="lca-wM-fTH"/>
@@ -109,6 +118,58 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="801-B5-u1j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2226" y="-182"/>
+        </scene>
+        <!--Map Settings View Controller-->
+        <scene sceneID="m3P-Na-Mct">
+            <objects>
+                <viewController id="3EI-AN-B84" customClass="MapSettingsViewController" customModule="FuelLoup" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="W1o-zv-iHS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbL-Ud-W2r">
+                                <rect key="frame" x="16" y="60" width="382" height="25.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <color key="textColor" systemColor="systemPurpleColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NpG-Jc-Cy0">
+                                <rect key="frame" x="16" y="101.5" width="382" height="31"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Black and white map" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cAo-uK-kXS">
+                                        <rect key="frame" x="0.0" y="0.0" width="333" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fBY-h1-Z49">
+                                        <rect key="frame" x="333" y="0.0" width="51" height="31"/>
+                                        <color key="onTintColor" systemColor="systemPurpleColor"/>
+                                        <connections>
+                                            <action selector="onMapChange:" destination="3EI-AN-B84" eventType="valueChanged" id="f83-lN-JdV"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="rS5-My-Ocd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="lbL-Ud-W2r" firstAttribute="top" secondItem="rS5-My-Ocd" secondAttribute="top" constant="16" id="0hs-7y-PQE"/>
+                            <constraint firstItem="NpG-Jc-Cy0" firstAttribute="top" secondItem="lbL-Ud-W2r" secondAttribute="bottom" constant="16" id="2eN-T7-itg"/>
+                            <constraint firstItem="rS5-My-Ocd" firstAttribute="trailing" secondItem="lbL-Ud-W2r" secondAttribute="trailing" constant="16" id="7uM-Lm-279"/>
+                            <constraint firstItem="NpG-Jc-Cy0" firstAttribute="leading" secondItem="rS5-My-Ocd" secondAttribute="leading" constant="16" id="kTt-I7-Q8M"/>
+                            <constraint firstItem="lbL-Ud-W2r" firstAttribute="leading" secondItem="rS5-My-Ocd" secondAttribute="leading" constant="16" id="sj0-0C-95r"/>
+                            <constraint firstItem="rS5-My-Ocd" firstAttribute="trailing" secondItem="NpG-Jc-Cy0" secondAttribute="trailing" constant="16" id="t3e-lb-MFB"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="changeMapSwitch" destination="fBY-h1-Z49" id="VuM-2k-rrx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="maE-4o-1Vk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3541" y="-360"/>
         </scene>
         <!--Station Details View Controller-->
         <scene sceneID="0QA-OT-2Eh">
@@ -438,12 +499,13 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="hID-Ug-89h"/>
-        <segue reference="swG-ZM-4Xg"/>
+        <segue reference="YTz-tl-03R"/>
+        <segue reference="8vO-yE-HpR"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
         <image name="map" catalog="system" width="128" height="110"/>
+        <image name="mappin.circle.fill" catalog="system" width="128" height="121"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -10,4 +10,5 @@ import Foundation
 enum SegueIdentifires: String {
     case showFavorites = "showFavorites"
     case showStationDetails = "showStationDetails"
+    case showMapSettings = "showMapSettings"
 }

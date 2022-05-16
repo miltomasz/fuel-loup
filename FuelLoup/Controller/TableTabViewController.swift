@@ -127,6 +127,8 @@ final class TableTabViewController: UIViewController, DataControllerAware {
             favoritesIconButton.isEnabled = true
             favoritesIconButton.tintColor = UIColor.white
         }
+        
+//        navigationItem.rightBarButtonItems = [settingsButton, favoritesIconButton]
     }
     
     private func setupTableView() {

@@ -22,10 +22,9 @@
 		064EBAAE2745C60300DBBC9A /* EvStationLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EBAAD2745C60300DBBC9A /* EvStationLocationCell.swift */; };
 		064EBAB2274ED13800DBBC9A /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EBAB1274ED13800DBBC9A /* LocationHelper.swift */; };
 		064EBAB62753F28900DBBC9A /* ResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EBAB52753F28900DBBC9A /* ResultViewModel.swift */; };
-		0665D66B27F279E1009F0B3A /* Alamofire.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0665D66A27F279E1009F0B3A /* Alamofire.xcframework */; };
-		0665D66C27F279E1009F0B3A /* Alamofire.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0665D66A27F279E1009F0B3A /* Alamofire.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0665D66E27F279E4009F0B3A /* Lottie.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0634531E2798C32800758973 /* Lottie.xcframework */; };
-		0665D66F27F279E4009F0B3A /* Lottie.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0634531E2798C32800758973 /* Lottie.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		064ED1342819FE80005253CA /* Lottie.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 064ED1332819FE80005253CA /* Lottie.xcframework */; };
+		064ED1362819FF35005253CA /* Alamofire.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 064ED1352819FF35005253CA /* Alamofire.xcframework */; };
+		064ED13828282DDB005253CA /* MapSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064ED13728282DDB005253CA /* MapSettingsViewController.swift */; };
 		069959192714F22B00D90343 /* ConnectorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 069959182714F22B00D90343 /* ConnectorView.xib */; };
 		0699591B2716355E00D90343 /* ConnectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0699591A2716355E00D90343 /* ConnectorView.swift */; };
 		06BB44202693B9FA00357948 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BB441F2693B9FA00357948 /* AppDelegate.swift */; };
@@ -53,8 +52,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0665D66F27F279E4009F0B3A /* Lottie.xcframework in Embed Frameworks */,
-				0665D66C27F279E1009F0B3A /* Alamofire.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -62,10 +59,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		060BFB7227E7A37B00F243AD /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../Library/Developer/Xcode/DerivedData/Alamofire-gxemjpiolqqxmodajgmbfkxendjl/Build/Products/Debug-iphonesimulator/Alamofire.framework"; sourceTree = "<group>"; };
 		063452D22787B44300758973 /* FuelLoupDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuelLoupDataController.swift; sourceTree = "<group>"; };
 		063453192790EF7D00758973 /* JsonDataToChargingParkTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDataToChargingParkTransformer.swift; sourceTree = "<group>"; };
-		0634531E2798C32800758973 /* Lottie.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Lottie.xcframework; path = Carthage/Build/Lottie.xcframework; sourceTree = "<group>"; };
 		06345326279C3A3900758973 /* added_fav.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = added_fav.json; sourceTree = "<group>"; };
 		0634532A279C56F300758973 /* DataControllerAware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataControllerAware.swift; sourceTree = "<group>"; };
 		0634532D27A6FEEA00758973 /* JsonDataToAddressTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDataToAddressTransformer.swift; sourceTree = "<group>"; };
@@ -79,7 +74,9 @@
 		064EBAAD2745C60300DBBC9A /* EvStationLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvStationLocationCell.swift; sourceTree = "<group>"; };
 		064EBAB1274ED13800DBBC9A /* LocationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHelper.swift; sourceTree = "<group>"; };
 		064EBAB52753F28900DBBC9A /* ResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewModel.swift; sourceTree = "<group>"; };
-		0665D66A27F279E1009F0B3A /* Alamofire.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Alamofire.xcframework; path = Carthage/Build/Alamofire.xcframework; sourceTree = "<group>"; };
+		064ED1332819FE80005253CA /* Lottie.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Lottie.xcframework; sourceTree = "<group>"; };
+		064ED1352819FF35005253CA /* Alamofire.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Alamofire.xcframework; sourceTree = "<group>"; };
+		064ED13728282DDB005253CA /* MapSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSettingsViewController.swift; sourceTree = "<group>"; };
 		069959182714F22B00D90343 /* ConnectorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectorView.xib; sourceTree = SOURCE_ROOT; };
 		0699591A2716355E00D90343 /* ConnectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectorView.swift; sourceTree = "<group>"; };
 		06BB441C2693B9FA00357948 /* FuelLoup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FuelLoup.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,8 +104,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0665D66E27F279E4009F0B3A /* Lottie.xcframework in Frameworks */,
-				0665D66B27F279E1009F0B3A /* Alamofire.xcframework in Frameworks */,
+				064ED1362819FF35005253CA /* Alamofire.xcframework in Frameworks */,
+				064ED1342819FE80005253CA /* Lottie.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,6 +148,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		064ED1312819FDDB005253CA /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				064ED1352819FF35005253CA /* Alamofire.xcframework */,
+				064ED1332819FE80005253CA /* Lottie.xcframework */,
+			);
+			path = Libs;
+			sourceTree = "<group>";
+		};
 		06BB44132693B9FA00357948 = {
 			isa = PBXGroup;
 			children = (
@@ -171,6 +177,7 @@
 		06BB441E2693B9FA00357948 /* FuelLoup */ = {
 			isa = PBXGroup;
 			children = (
+				064ED1312819FDDB005253CA /* Libs */,
 				064EBAB42753F26E00DBBC9A /* ViewModel */,
 				064EBAAA2744789100DBBC9A /* Utility */,
 				063F9F7C26E0338A006DF74F /* View */,
@@ -206,6 +213,7 @@
 				06BB445026966E9300357948 /* MapTabViewController.swift */,
 				063F9F7A26D31B72006DF74F /* EvStationDetailsViewController.swift */,
 				064EBAA827446A4D00DBBC9A /* TableTabViewController.swift */,
+				064ED13728282DDB005253CA /* MapSettingsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -222,9 +230,6 @@
 		06BB444326950C2300357948 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0665D66A27F279E1009F0B3A /* Alamofire.xcframework */,
-				060BFB7227E7A37B00F243AD /* Alamofire.framework */,
-				0634531E2798C32800758973 /* Lottie.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -321,6 +326,7 @@
 				063F9F7B26D31B72006DF74F /* EvStationDetailsViewController.swift in Sources */,
 				06BB444B26950DE100357948 /* StationsResponse.swift in Sources */,
 				06CBC1C827C2B4B6003C22C0 /* CustomAnnotationView.swift in Sources */,
+				064ED13828282DDB005253CA /* MapSettingsViewController.swift in Sources */,
 				06CBC1C527C12842003C22C0 /* FuelLoupAnnotationView.swift in Sources */,
 				06BB445326966ECF00357948 /* NetworkHelper.swift in Sources */,
 				06BB445126966E9300357948 /* MapTabViewController.swift in Sources */,

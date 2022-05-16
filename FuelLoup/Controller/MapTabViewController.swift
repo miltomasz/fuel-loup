@@ -18,10 +18,15 @@ final class MapTabViewController: UIViewController, DataControllerAware {
     
     // MARK: - Properties
     
+    private lazy var overlay: MKTileOverlay = {
+        let overlayURL = "https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png"
+        let overlay = MKTileOverlay(urlTemplate: overlayURL)
+        overlay.canReplaceMapContent = true
+        return overlay
+    }()
     private let locationManager = CLLocationManager()
     private var _dataController: FuelLoupDataController?
     private let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-    
     var selectedEvStationId: String?
     var position: Position?
     var dataSources: DataSources?
@@ -43,17 +48,10 @@ final class MapTabViewController: UIViewController, DataControllerAware {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addMapOverlay()
+        setupLocationManager()
+        refreshMapView()
+        
         mapView.delegate = self
-        
-        locationManager.requestAlwaysAuthorization()
-        locationManager.requestWhenInUseAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled() {
-             locationManager.delegate = self
-             locationManager.desiredAccuracy = kCLLocationAccuracyBest
-             locationManager.startUpdatingLocation()
-         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -83,22 +81,11 @@ final class MapTabViewController: UIViewController, DataControllerAware {
             guard let selectedEvStationId = selectedEvStationId else { return }
             
             stationDetailsViewController.selectedEvStation = ResultViewModel.create(from: selectedEvStationId, address: address, chargingPark: chargingPark, position: position, poi: poi, dataSources: dataSources)
-        default: break
-        }
-    }
-    
-    private func handleStationsLocationResponse(results: [ResultModel]?, error: Error?) {
-        NetworkHelper.showLoader(false, activityIndicator: activityIndicator)
-        
-        locationManager.stopUpdatingLocation()
-        
-        if let results = results, !results.isEmpty {
-            setupTableTabViewModel(results: results)
-            setupAnnotations(results: results)
-        } else {
-            guard let tabBarController = tabBarController else { return }
+        case SegueIdentifires.showMapSettings.rawValue:
+            guard let mapSettingsViewController = segue.destination as? MapSettingsViewController else { return }
             
-            NetworkHelper.showFailurePopup(title: "EV charging stations load error", message: error?.localizedDescription ?? "", on: tabBarController)
+            mapSettingsViewController.delegate = self
+        default: break
         }
     }
     
@@ -108,7 +95,6 @@ final class MapTabViewController: UIViewController, DataControllerAware {
         mapView.removeAnnotations(mapView.annotations)
         
         let annotations = createAnnotations(for: results)
-        
         mapView.addAnnotations(annotations)
     }
     
@@ -167,6 +153,16 @@ final class MapTabViewController: UIViewController, DataControllerAware {
         })
     }
     
+    private func setupLocationManager() {
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+             locationManager.delegate = self
+             locationManager.desiredAccuracy = kCLLocationAccuracyBest
+             locationManager.startUpdatingLocation()
+         }
+    }
 }
 
 // MARK: - MKMapViewDelegate
@@ -206,13 +202,16 @@ extension MapTabViewController: MKMapViewDelegate {
         
         return MKTileOverlayRenderer(tileOverlay: tileOverlay)
     }
-    
-    private func addMapOverlay() {
-        let overlayURL = "https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png"
-        let overlay = MKTileOverlay(urlTemplate: overlayURL)
-        overlay.canReplaceMapContent = true
-        
-        mapView.addOverlay(overlay)
+}
+
+extension MapTabViewController: MapOverlayViewDelegate {
+    func refreshMapView() {
+        let blackWhiteMapOn = UserDefaults.standard.bool(forKey: "BlackWhiteMap")
+        if blackWhiteMapOn {
+            mapView.addOverlay(overlay)
+        } else {
+            mapView.removeOverlay(overlay)
+        }
     }
 }
 
@@ -236,14 +235,13 @@ extension MapTabViewController: ExampleCalloutViewDelegate {
             mapView.deselectAnnotation(annotation, animated: false)
         }
 
-        performSegue(withIdentifier: "showStationDetails", sender: nil)
+        performSegue(withIdentifier: SegueIdentifires.showStationDetails.rawValue, sender: nil)
     }
 }
 
 // MARK: - CLLocationManagerDelegate
 
 extension MapTabViewController: CLLocationManagerDelegate {
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let coordinate = manager.location?.coordinate else { return }
 
@@ -258,4 +256,18 @@ extension MapTabViewController: CLLocationManagerDelegate {
         FuelLoupClient.getNearestEvStations(latitude: coordinate.latitude, longitude: coordinate.longitude, completion: handleStationsLocationResponse(results:error:))
     }
     
+    private func handleStationsLocationResponse(results: [ResultModel]?, error: Error?) {
+        NetworkHelper.showLoader(false, activityIndicator: activityIndicator)
+        
+        locationManager.stopUpdatingLocation()
+        
+        if let results = results, !results.isEmpty {
+            setupTableTabViewModel(results: results)
+            setupAnnotations(results: results)
+        } else {
+            guard let tabBarController = tabBarController else { return }
+            
+            NetworkHelper.showFailurePopup(title: "EV charging stations load error", message: error?.localizedDescription ?? "", on: tabBarController)
+        }
+    }
 }
