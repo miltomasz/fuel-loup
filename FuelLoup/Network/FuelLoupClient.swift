@@ -19,7 +19,7 @@ class FuelLoupClient {
     }
     
     struct RequestParam {
-        static let area = 10000
+        static let area = 5000
         static let categorySet = 7309
     }
     
