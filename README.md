@@ -34,11 +34,20 @@ The screen is for selecting map type - should it be the default Apple map displa
 4. Favorites screen
 
 If user taps on "Add to favorites" button in details screen (2) the selected ev station is saved in database (using CoreData interface). Next, if user taps on Favorites option in the navigation bar he is redirected to Favorites screen displaying a list of favorite ev stations. The list shows basic information about the ev station exactly in the same way as the screen in list tab does.
+In the favorites list user can remove ev station from favorites swiping left on the selected row.
 
 ## Technical disclosure
 
-The app is build on MVC pattern using storyboards and segues to navigate.
-I have used two external libraries Alamofire and Lottie which are located in Libs folder in the project structure. They are compiled as xcframeworks so can be used in every architecture and iOS version.
-I have also used three classes for callout views (info view displaying over the map view) from Robert Ryan project: All the information about author and copyrights are in the files' headers.
+- The app is build on MVC pattern using storyboards and segues to navigate.
+- I have used two external libraries: Alamofire and Lottie which are located in Libs folder in the project structure. They are compiled as xcframeworks so can be used in every architecture and iOS version.
+- I have also used three classes for callout views (info view displayed over the map view) from Robert Ryan's project: https://github.com/robertmryan/CustomMapViewAnnotationCalloutSwift In the project they are loacted in View/CustomCallout folder.
+All the information about author and copyrights are in the files' headers.
+
+## Build and run instructions
+
+- 
+- The app should compile and build after checkout from the repository. No additional actions are needed
+- User should grant an access for Apple location service
+- The app has been tested on iOS version >= 14.0
 
 
