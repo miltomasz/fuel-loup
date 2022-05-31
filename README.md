@@ -1,11 +1,11 @@
 # fuel-loup
 iOS Udacity capstone project
 
--- Idea
+## Idea
 
 FuelLoup app finds electric vehicle (ev) stations located around user and displays it on the map. Ev stations are gathered basing on the current user location (longitude and latidue values). It also shows a list of these ev stations with an approximate distance from user location to each ev station.
 
-- The screens
+## The screens
 
 1. Main screen
 
@@ -34,5 +34,11 @@ The screen is for selecting map type - should it be the default Apple map displa
 4. Favorites screen
 
 If user taps on "Add to favorites" button in details screen (2) the selected ev station is saved in database (using CoreData interface). Next, if user taps on Favorites option in the navigation bar he is redirected to Favorites screen displaying a list of favorite ev stations. The list shows basic information about the ev station exactly in the same way as the screen in list tab does.
+
+## Technical disclosure
+
+The app is build on MVC pattern using storyboards and segues to navigate.
+I have used two external libraries Alamofire and Lottie which are located in Libs folder in the project structure. They are compiled as xcframeworks so can be used in every architecture and iOS version.
+I have also used three classes for callout views (info view displaying over the map view) from Robert Ryan project: All the information about author and copyrights are in the files' headers.
 
 
