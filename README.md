@@ -1,7 +1,7 @@
 # fuel-loup
 iOS Udacity capstone project
 
-- Idea
+-- Idea
 
 FuelLoup app finds electric vehicle (ev) stations located around user and displays it on the map. Ev stations are gathered basing on the current user location (longitude and latidue values). It also shows a list of these ev stations with an approximate distance from user location to each ev station.
 
@@ -24,8 +24,15 @@ It displays all the information about ev station:
 * name, address, phone
 * available connectors (name, type and power they provide)
 * button for adding the ev station to favorites
+* if ev station is already added to Favorites the button presents "Remove from Favorites" option and action
 * button for launching system map application (Google or Apple) and displaying route to the ev station
 
 3. Map settings screen
+
+The screen is for selecting map type - should it be the default Apple map displayed or maybe user wants it to have a black/white overlay on the map. The choice is saved in UserDefaults storage so next app launch remembers which map to show.
+
+4. Favorites screen
+
+If user taps on "Add to favorites" button in details screen (2) the selected ev station is saved in database (using CoreData interface). Next, if user taps on Favorites option in the navigation bar he is redirected to Favorites screen displaying a list of favorite ev stations. The list shows basic information about the ev station exactly in the same way as the screen in list tab does.
 
 
