@@ -22,11 +22,13 @@
 		064EBAAE2745C60300DBBC9A /* EvStationLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EBAAD2745C60300DBBC9A /* EvStationLocationCell.swift */; };
 		064EBAB2274ED13800DBBC9A /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EBAB1274ED13800DBBC9A /* LocationHelper.swift */; };
 		064EBAB62753F28900DBBC9A /* ResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EBAB52753F28900DBBC9A /* ResultViewModel.swift */; };
-		064ED1342819FE80005253CA /* Lottie.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 064ED1332819FE80005253CA /* Lottie.xcframework */; };
-		064ED1362819FF35005253CA /* Alamofire.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 064ED1352819FF35005253CA /* Alamofire.xcframework */; };
 		064ED13828282DDB005253CA /* MapSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064ED13728282DDB005253CA /* MapSettingsViewController.swift */; };
 		069959192714F22B00D90343 /* ConnectorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 069959182714F22B00D90343 /* ConnectorView.xib */; };
 		0699591B2716355E00D90343 /* ConnectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0699591A2716355E00D90343 /* ConnectorView.swift */; };
+		06A2A3FA284982E900455666 /* Alamofire.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 064ED1352819FF35005253CA /* Alamofire.xcframework */; };
+		06A2A3FB284982E900455666 /* Alamofire.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 064ED1352819FF35005253CA /* Alamofire.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		06A2A3FD284982EB00455666 /* Lottie.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 064ED1332819FE80005253CA /* Lottie.xcframework */; };
+		06A2A3FE284982EB00455666 /* Lottie.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 064ED1332819FE80005253CA /* Lottie.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		06BB44202693B9FA00357948 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BB441F2693B9FA00357948 /* AppDelegate.swift */; };
 		06BB44222693B9FA00357948 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BB44212693B9FA00357948 /* SceneDelegate.swift */; };
 		06BB44272693B9FA00357948 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06BB44252693B9FA00357948 /* Main.storyboard */; };
@@ -46,12 +48,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		0665D66D27F279E1009F0B3A /* Embed Frameworks */ = {
+		06A2A3FC284982E900455666 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				06A2A3FE284982EB00455666 /* Lottie.xcframework in Embed Frameworks */,
+				06A2A3FB284982E900455666 /* Alamofire.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,8 +108,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				064ED1362819FF35005253CA /* Alamofire.xcframework in Frameworks */,
-				064ED1342819FE80005253CA /* Lottie.xcframework in Frameworks */,
+				06A2A3FD284982EB00455666 /* Lottie.xcframework in Frameworks */,
+				06A2A3FA284982E900455666 /* Alamofire.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,7 +258,7 @@
 				06BB44182693B9FA00357948 /* Sources */,
 				06BB44192693B9FA00357948 /* Frameworks */,
 				06BB441A2693B9FA00357948 /* Resources */,
-				0665D66D27F279E1009F0B3A /* Embed Frameworks */,
+				06A2A3FC284982E900455666 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -503,6 +507,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
+					"@executable_path/FuelLoup/Libs",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Plumya.FuelLoup;
@@ -528,6 +533,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
+					"@executable_path/FuelLoup/Libs",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Plumya.FuelLoup;
