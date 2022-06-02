@@ -54,6 +54,10 @@ final class MapTabViewController: UIViewController, DataControllerAware {
         mapView.delegate = self
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        locationManager.requestWhenInUseAuthorization()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -154,14 +158,23 @@ final class MapTabViewController: UIViewController, DataControllerAware {
     }
     
     private func setupLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
-             locationManager.delegate = self
-             locationManager.desiredAccuracy = kCLLocationAccuracyBest
-             locationManager.startUpdatingLocation()
-         }
+            switch locationManager.authorizationStatus {
+            case .notDetermined, .restricted, .denied:
+                handleDeniedLocationServices()
+            case .authorizedAlways, .authorizedWhenInUse:
+                updateLocation()
+            @unknown default:
+                break
+            }
+        } else {
+            handleDeniedLocationServices()
+        }
     }
 }
 
@@ -242,6 +255,17 @@ extension MapTabViewController: ExampleCalloutViewDelegate {
 // MARK: - CLLocationManagerDelegate
 
 extension MapTabViewController: CLLocationManagerDelegate {
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .notDetermined, .restricted, .denied:
+            handleDeniedLocationServices()
+        case .authorizedAlways, .authorizedWhenInUse:
+            updateLocation()
+        @unknown default:
+            break
+        }
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let coordinate = manager.location?.coordinate else { return }
 
@@ -269,5 +293,16 @@ extension MapTabViewController: CLLocationManagerDelegate {
             
             NetworkHelper.showFailurePopup(title: "EV charging stations load error", message: error?.localizedDescription ?? "", on: tabBarController)
         }
+    }
+    
+    private func handleDeniedLocationServices() {
+        NetworkHelper.hideLoaderIfStopped(activityIndicator: activityIndicator)
+        guard let tabBarController = tabBarController else { return }
+        
+        NetworkHelper.showFailurePopup(title: "Warning", message: "To use the application you need to enable Location Services in Settings -> Privacy -> Location Services", on: tabBarController)
+    }
+    
+    private func updateLocation() {
+        locationManager.startUpdatingLocation()
     }
 }
