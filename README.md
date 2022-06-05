@@ -45,7 +45,7 @@ All the information about the author and copyrights have been preserved.
 
 ## Build and run instructions
 
-- Download the project: ```git clone```
+- Download the project: ```git clone git@github.com:miltomasz/fuel-loup.git```
 - The app should compile and build after checkout from the repository. No additional actions are needed
 - User should grant an access to Apple's location services
 - The app has been tested on iOS version >= 14.0
