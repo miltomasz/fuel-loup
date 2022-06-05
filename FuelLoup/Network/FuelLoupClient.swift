@@ -8,14 +8,9 @@
 import UIKit
 import Alamofire
 
-class FuelLoupClient {
-    
+struct FuelLoupClient {
     struct Auth {
-//        static let appId = "z9eDMHGTdyTTMMwYLwc0"
-//        static let appCode = "KgGb4o4LljrLasCUP6yoSdOo2QuSwePrWxK_4K7kU5A"
-//        static let apiKey = "_FQo20g38S_PxdtNSklfFgLkwAvKYfUuWTyE-wa4zHSs2fOyzvKMMGyQMKlqhcm9LoykYYSlbu4d_7kNylD8VA"
-//        static let nrelApiKey = "yelsLDkSYHnqE3eXVt6Fg9PnoyREeha5PYYeeGds"
-        static let ttKey = "OF0ZWUvDw0I9vxvagdwiRmEaWAxg1TAg"
+        static let ttKey = ""
     }
     
     struct RequestParam {
@@ -52,7 +47,7 @@ class FuelLoupClient {
         }
     }
     
-    class func getNearestEvStations(latitude: Double, longitude: Double, completion: @escaping ([ResultModel]?, Error?) -> Void) {
+    static func getNearestEvStations(latitude: Double, longitude: Double, completion: @escaping ([ResultModel]?, Error?) -> Void) {
         AF.request(Endpoints.getNearestEvStations(latitude: latitude, longitude: longitude).url) { request in
             request.timeoutInterval = 20
         }
@@ -65,7 +60,7 @@ class FuelLoupClient {
         }
     }
     
-    class func getEvStationDetails(id: String, completion: @escaping (PoiDetails?, Error?) -> Void) {
+    static func getEvStationDetails(id: String, completion: @escaping (PoiDetails?, Error?) -> Void) {
         AF.request(Endpoints.getEvStationDetails(id: id).url) { request in
             request.timeoutInterval = 20
         }
@@ -78,7 +73,7 @@ class FuelLoupClient {
         }
     }
     
-    class func getPhoto(id: String, completion: @escaping (UIImage?, Error?) -> Void) {
+    static func getPhoto(id: String, completion: @escaping (UIImage?, Error?) -> Void) {
         AF.request(Endpoints.getPhoto(id: id).url) { request in
             request.timeoutInterval = 20
         }
@@ -92,7 +87,7 @@ class FuelLoupClient {
         }
     }
     
-    class func getChargingStationAvailability(availabilityId: String, completion: @escaping (ChargingStationAvailability?, Error?) -> Void) {
+    static func getChargingStationAvailability(availabilityId: String, completion: @escaping (ChargingStationAvailability?, Error?) -> Void) {
         AF.request(Endpoints.getAvailability(availabilityId: availabilityId).url) { request in
             request.timeoutInterval = 20
         }
@@ -104,5 +99,4 @@ class FuelLoupClient {
             }
         }
     }
-    
 }
