@@ -3,15 +3,15 @@ iOS Udacity capstone project
 
 ## Idea
 
-FuelLoup app finds electric vehicle (ev) stations located around user and displays it on the map. Ev stations are gathered basing on the current user location (longitude and latidue values). It also shows a list of these ev stations with an approximate distance from user location to each ev station.
+FuelLoup app finds electric vehicle (ev) charging stations located around user and displays it on the map. Ev stations are gathered basing on the current user location (longitude and latidue values). It also presents a list of these ev stations together with an approximate distance from user location to each ev station.
 
-## The screens
+## Screens
 
 1. Main screen
 
- The app presents two tabs:
+ The main screen consists of two tabs:
 * map view with the Ev stations localized in the area of 5 km
-* List of the same ev stations with an approximate distance from user location 
+* list of the same ev stations with an approximate distance from user location 
 
 In the navigation bar on the right there is map settings (3) and favorites options (4).
 
@@ -40,14 +40,14 @@ In the favorites list user can remove ev station from favorites swiping left on 
 
 - The app is build on MVC pattern using storyboards and segues to navigate.
 - I have used two external libraries: Alamofire and Lottie which are located in Libs folder in the project structure. They are compiled as xcframeworks so can be used in every architecture and iOS version.
-- I have also used three classes for callout views (info view displayed over the map view) from Robert Ryan's project: https://github.com/robertmryan/CustomMapViewAnnotationCalloutSwift In the project they are loacted in View/CustomCallout folder.
-All the information about author and copyrights are in the files' headers.
+- I have also used three classes for callout views (info view displayed over the map view) from Robert Ryan's project: https://github.com/robertmryan/CustomMapViewAnnotationCalloutSwift . They are loacted in View/CustomCallout folder in the project.
+All the information about the author and copyrights have been preserved.
 
 ## Build and run instructions
 
-- 
+- Download the project: ```git clone```
 - The app should compile and build after checkout from the repository. No additional actions are needed
-- User should grant an access for Apple location service
+- User should grant an access to Apple's location services
 - The app has been tested on iOS version >= 14.0
 
 
