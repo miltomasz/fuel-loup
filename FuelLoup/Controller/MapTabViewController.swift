@@ -50,7 +50,6 @@ final class MapTabViewController: UIViewController, DataControllerAware {
         super.viewDidLoad()
         setupLocationManager()
         refreshMapView()
-        
         mapView.delegate = self
     }
     
@@ -159,16 +158,19 @@ final class MapTabViewController: UIViewController, DataControllerAware {
     
     private func setupLocationManager() {
         locationManager.delegate = self
+        locationManager.distanceFilter = 30.0
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
             switch locationManager.authorizationStatus {
-            case .notDetermined, .restricted, .denied:
+            case .restricted, .denied:
                 handleDeniedLocationServices()
             case .authorizedAlways, .authorizedWhenInUse:
                 updateLocation()
+            case .notDetermined:
+                break
             @unknown default:
                 break
             }
@@ -268,6 +270,9 @@ extension MapTabViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let coordinate = manager.location?.coordinate else { return }
+        
+        manager.stopUpdatingLocation()
+        manager.delegate = nil
 
         let region = MKCoordinateRegion(center: coordinate, span: span)
         
@@ -303,6 +308,7 @@ extension MapTabViewController: CLLocationManagerDelegate {
     }
     
     private func updateLocation() {
+        locationManager.delegate = self
         locationManager.startUpdatingLocation()
     }
 }

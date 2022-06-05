@@ -53,18 +53,23 @@ class FuelLoupClient {
     }
     
     class func getNearestEvStations(latitude: Double, longitude: Double, completion: @escaping ([ResultModel]?, Error?) -> Void) {
-        AF.request(Endpoints.getNearestEvStations(latitude: latitude, longitude: longitude).url)
-            .responseDecodable(of: StationsResponse.self) { response in
-                if let responseValue = response.value {
-                    completion(responseValue.results, nil)
-                } else {
-                    completion(nil, response.error)
-                }
+        AF.request(Endpoints.getNearestEvStations(latitude: latitude, longitude: longitude).url) { request in
+            request.timeoutInterval = 20
+        }
+        .responseDecodable(of: StationsResponse.self) { response in
+            if let responseValue = response.value {
+                completion(responseValue.results, nil)
+            } else {
+                completion(nil, response.error)
             }
+        }
     }
     
     class func getEvStationDetails(id: String, completion: @escaping (PoiDetails?, Error?) -> Void) {
-        AF.request(Endpoints.getEvStationDetails(id: id).url).responseDecodable(of: PoiDetails.self) { response in
+        AF.request(Endpoints.getEvStationDetails(id: id).url) { request in
+            request.timeoutInterval = 20
+        }
+        .responseDecodable(of: PoiDetails.self) { response in
             if let poiDetails = response.value {
                 completion(poiDetails, nil)
             } else {
@@ -74,7 +79,10 @@ class FuelLoupClient {
     }
     
     class func getPhoto(id: String, completion: @escaping (UIImage?, Error?) -> Void) {
-        AF.request(Endpoints.getPhoto(id: id).url).response { response in
+        AF.request(Endpoints.getPhoto(id: id).url) { request in
+            request.timeoutInterval = 20
+        }
+        .response { response in
             if let data = response.value as? Data {
                 let image = UIImage(data: data)
                 completion(image, nil)
@@ -85,7 +93,10 @@ class FuelLoupClient {
     }
     
     class func getChargingStationAvailability(availabilityId: String, completion: @escaping (ChargingStationAvailability?, Error?) -> Void) {
-        AF.request(Endpoints.getAvailability(availabilityId: availabilityId).url).responseDecodable(of: ChargingStationAvailability.self) { response in
+        AF.request(Endpoints.getAvailability(availabilityId: availabilityId).url) { request in
+            request.timeoutInterval = 20
+        }
+        .responseDecodable(of: ChargingStationAvailability.self) { response in
             if let stationAvailability = response.value {
                 completion(stationAvailability, nil)
             } else {
