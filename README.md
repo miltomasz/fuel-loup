@@ -3,7 +3,7 @@ iOS Udacity capstone project
 
 ## Idea
 
-FuelLoup app finds electric vehicle (ev) charging stations located around user and displays it on the map. Ev stations are gathered basing on the current user location (longitude and latidue values). It also presents a list of these ev stations together with an approximate distance from user location to each ev station.
+FuelLoup app finds electric vehicle (ev) charging stations located around user and displays it on the map. Ev stations are gathered basing on the current user location (longitude and latidue values). It also presents a list of these ev charging stations together with an approximate distance from user location to each ev station.
 
 ## Screens
 
