@@ -11,7 +11,7 @@ protocol MapOverlayViewDelegate {
     func refreshMapView()
 }
 
-class MapSettingsViewController: UIViewController {
+final class MapSettingsViewController: UIViewController {
     
     // MARK: - Configuration
     
@@ -33,15 +33,10 @@ class MapSettingsViewController: UIViewController {
     }
     
     @IBAction func onMapChange(_ sender: UISwitch) {
-        if sender.isOn {
-            UserDefaults.standard.set(true, forKey: Configuration.blackWhiteMap)
-        } else {
-            UserDefaults.standard.set(false, forKey: Configuration.blackWhiteMap)
-        }
+        UserDefaults.standard.set(sender.isOn, forKey: Configuration.blackWhiteMap)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         delegate?.refreshMapView()
     }
-    
 }

@@ -150,7 +150,7 @@ final class EvStationDetailsViewController: UIViewController {
     
     private func setupConnectorsLabel() {
         let connectorsLabel = UILabel()
-        connectorsLabel.text = "Connectors"
+        connectorsLabel.text = "details.connectors".localized
         connectorsLabel.textAlignment = .left
         connectorsLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
         connectorsLabel.textColor = .black

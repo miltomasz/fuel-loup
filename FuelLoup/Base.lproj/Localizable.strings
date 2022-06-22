@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  FuelLoup
+
+  Created by Tomasz Milczarek on 22/06/2022.
+  
+*/
+
+"settings.main.title" = "Map settings";
+"details.connectors" = "Connectors";

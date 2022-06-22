@@ -1,0 +1,60 @@
+
+/* Class = "UIButton"; normalTitle = "Drive to station"; ObjectID = "21d-Ji-2bA"; */
+"21d-Ji-2bA.normalTitle" = "Nawiguj";
+
+/* Class = "UILabel"; text = "2.7 km"; ObjectID = "3Cl-oh-igH"; */
+"3Cl-oh-igH.text" = "2.7 km";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "6k9-9x-GAL"; */
+"6k9-9x-GAL.title" = " ";
+
+/* Class = "UILabel"; text = "Name:"; ObjectID = "B6a-xC-ul3"; */
+"B6a-xC-ul3.text" = "Nazwa:";
+
+/* Class = "UILabel"; text = "Place"; ObjectID = "BsE-On-Wnw"; */
+"BsE-On-Wnw.text" = "Punkt";
+
+/* Class = "UILabel"; text = "Electric vehicle connectors"; ObjectID = "Hxn-vZ-Fd6"; */
+"Hxn-vZ-Fd6.text" = "Stacje ładujące";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "II9-ql-cIa"; */
+"II9-ql-cIa.title" = "Item";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "KAn-Kc-zJo"; */
+"KAn-Kc-zJo.title" = "Item";
+
+/* Class = "UIButton"; normalTitle = "Add to favorites"; ObjectID = "P97-c4-fk8"; */
+"P97-c4-fk8.normalTitle" = "Do ulubionych";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "UEB-Iz-R7O"; */
+"UEB-Iz-R7O.title" = " ";
+
+/* Class = "UILabel"; text = "678 33333 9990"; ObjectID = "Wnf-aU-bpx"; */
+"Wnf-aU-bpx.text" = "678 33333 9990";
+
+/* Class = "UILabel"; text = "Black and white map"; ObjectID = "cAo-uK-kXS"; */
+"cAo-uK-kXS.text" = "Mapa biało-czarna";
+
+/* Class = "UILabel"; text = "test testing test testing test testing test testing test testing"; ObjectID = "cUA-98-dkJ"; */
+"cUA-98-dkJ.text" = "test testing test testing test testing test testing test testing";
+
+/* Class = "UINavigationItem"; title = "FuelLoup"; ObjectID = "f3u-PD-8uM"; */
+"f3u-PD-8uM.title" = "FuelLoup";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "hJI-CP-hb4"; */
+"hJI-CP-hb4.title" = " ";
+
+/* Class = "UINavigationItem"; title = "Details"; ObjectID = "kIq-TW-T89"; */
+"kIq-TW-T89.title" = "Szczegóły";
+
+/* Class = "UINavigationItem"; title = "FuelLoup"; ObjectID = "l0W-bG-B75"; */
+"l0W-bG-B75.title" = "FuelLoup";
+
+/* Class = "UILabel"; text = "Map settings"; ObjectID = "lbL-Ud-W2r"; */
+"lbL-Ud-W2r.text" = "Ustawienia mapy";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "qWh-VV-kZq"; */
+"qWh-VV-kZq.text" = "Nazwa";
+
+/* Class = "UILabel"; text = "Phone:"; ObjectID = "wJz-ke-5RH"; */
+"wJz-ke-5RH.text" = "Telefon:";
