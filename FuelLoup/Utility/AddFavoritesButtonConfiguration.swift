@@ -32,9 +32,9 @@ enum AddFavoritesButtonConfiguration {
     var title: String {
         switch self {
         case .added:
-            return "Remove from favorites"
+            return "fav.remove".localized
         case .notAdded:
-            return "Add to favorites"
+            return "fav.add".localized
         }
     }
     

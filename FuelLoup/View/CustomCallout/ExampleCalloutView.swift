@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-protocol ExampleCalloutViewDelegate: class {
+protocol ExampleCalloutViewDelegate: AnyObject {
     func mapView(_ mapView: MKMapView, didTapDetailsButton button: UIButton, for annotation: MKAnnotation)
 }
 
@@ -60,7 +60,7 @@ class ExampleCalloutView: CalloutView {
     private var detailsButton: UIButton = {
         let button = UIButton(type: .roundedRect)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Details", for: .normal)
+        button.setTitle("callout.details".localized, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemYellow
         button.layer.cornerRadius = 5
@@ -85,7 +85,7 @@ class ExampleCalloutView: CalloutView {
     private func updateContents(for annotation: MKAnnotation) {
         guard let nameAddressArray = annotation.title??.split(separator: " ", maxSplits: 1).map(String.init) else { return }
         
-        let name = nameAddressArray.count > 0 ? nameAddressArray[0] : "Unknown"
+        let name = nameAddressArray.count > 0 ? nameAddressArray[0] : "callout.no.address".localized
         let address = nameAddressArray.count > 1 ? nameAddressArray[1] : ""
         titleLabel.text = name
         addressLabel.text = address

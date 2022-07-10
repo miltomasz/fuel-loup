@@ -131,7 +131,7 @@ final class MapTabViewController: UIViewController, DataControllerAware {
             if let streetName = result.address?.streetName, let streetNumber = result.address?.streetNumber {
                 annotation.subtitle = "\(streetName) \(streetNumber)"
             } else {
-                annotation.subtitle = "No data available"
+                annotation.subtitle = "annotation.no.data".localized
             }
             
             annotations.append(annotation)

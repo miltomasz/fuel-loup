@@ -2,9 +2,14 @@
   Localizable.strings
   FuelLoup
 
-  Created by Tomasz Milczarek on 22/06/2022.
+  Created by Tomasz Milczarek on 03/07/2022.
   
 */
 
-"settings.main.title" = "Map settings";
+"annotation.no.data" = "No data available";
+"callout.details" = "Details";
+"callout.no.address" = "No data available";
+"fav.remove" = "Remove from favorites";
+"fav.add" = "Add to favorites";
 "details.connectors" = "Connectors";
+"favorites.screen.title" = "Favorites";

@@ -122,13 +122,11 @@ final class TableTabViewController: UIViewController, DataControllerAware {
         case .favourites:
             favoritesIconButton.isEnabled = false
             favoritesIconButton.tintColor = UIColor.clear
-            title = "Favourites"
+            title = "favorites.screen.title".localized
         case .regular:
             favoritesIconButton.isEnabled = true
             favoritesIconButton.tintColor = UIColor.white
         }
-        
-//        navigationItem.rightBarButtonItems = [settingsButton, favoritesIconButton]
     }
     
     private func setupTableView() {

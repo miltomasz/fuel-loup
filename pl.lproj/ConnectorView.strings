@@ -1,0 +1,12 @@
+
+/* Class = "UILabel"; text = "Type Value"; ObjectID = "0pc-Dv-aOT"; */
+"0pc-Dv-aOT.text" = "Type Value";
+
+/* Class = "UILabel"; text = "Power Label"; ObjectID = "HOH-Ls-VFE"; */
+"HOH-Ls-VFE.text" = "Power Label";
+
+/* Class = "UILabel"; text = "Type:"; ObjectID = "Jyc-Pg-hIn"; */
+"Jyc-Pg-hIn.text" = "Typ:";
+
+/* Class = "UILabel"; text = "Power:"; ObjectID = "RFl-ab-asS"; */
+"RFl-ab-asS.text" = "Moc:";

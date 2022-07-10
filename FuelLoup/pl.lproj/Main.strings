@@ -24,7 +24,7 @@
 "KAn-Kc-zJo.title" = "Item";
 
 /* Class = "UIButton"; normalTitle = "Add to favorites"; ObjectID = "P97-c4-fk8"; */
-"P97-c4-fk8.normalTitle" = "Do ulubionych";
+"P97-c4-fk8.normalTitle" = "Dodaj do ulubionych";
 
 /* Class = "UIBarButtonItem"; title = " "; ObjectID = "UEB-Iz-R7O"; */
 "UEB-Iz-R7O.title" = " ";
@@ -33,7 +33,7 @@
 "Wnf-aU-bpx.text" = "678 33333 9990";
 
 /* Class = "UILabel"; text = "Black and white map"; ObjectID = "cAo-uK-kXS"; */
-"cAo-uK-kXS.text" = "Mapa biało-czarna";
+"cAo-uK-kXS.text" = "Mapa czarno-biała";
 
 /* Class = "UILabel"; text = "test testing test testing test testing test testing test testing"; ObjectID = "cUA-98-dkJ"; */
 "cUA-98-dkJ.text" = "test testing test testing test testing test testing test testing";
@@ -57,4 +57,4 @@
 "qWh-VV-kZq.text" = "Nazwa";
 
 /* Class = "UILabel"; text = "Phone:"; ObjectID = "wJz-ke-5RH"; */
-"wJz-ke-5RH.text" = "Telefon:";
+"wJz-ke-5RH.text" = "Tel.:";
