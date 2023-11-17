@@ -23,7 +23,7 @@ class CalloutView: UIView {
     
     private enum Configuration {
         static let calloutViewMargin: CGFloat = 16.0
-        static let screenWidth: CGFloat = UIScreen.main.bounds.width - calloutViewMargin
+        static let screenWidth: CGFloat = UIScreen.main.bounds.width - (4 * calloutViewMargin)
     }
 
     /// The annotation for which this callout has been created.
@@ -88,7 +88,7 @@ class CalloutView: UIView {
     private func configureView() {
         translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            widthAnchor.constraint(lessThanOrEqualToConstant: Configuration.screenWidth)
+            widthAnchor.constraint(equalToConstant: Configuration.screenWidth)
         ])
 
         addSubview(contentView)

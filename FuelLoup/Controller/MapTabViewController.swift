@@ -208,6 +208,21 @@ extension MapTabViewController: MKMapViewDelegate {
         mapView.setRegion(region, animated: true)
     }
     
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        let mapCoordinate = mapView.centerCoordinate
+
+        let mapRegion = MKCoordinateRegion(center: mapCoordinate, span: span)
+        let lat = mapRegion.center.latitude
+        let lng = mapRegion.center.longitude
+//        mapView.setRegion(region, animated: true)
+//        mapView.mapType = .mutedStandard
+//        mapView.showsUserLocation = true
+//
+//        NetworkHelper.showLoader(true, activityIndicator: activityIndicator)
+//
+//        FuelLoupClient.getNearestEvStations(latitude: coordinate.latitude, longitude: coordinate.longitude, completion: handleStationsLocationResponse(results:error:))
+    }
+    
     // MARK: Map overlay
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -275,13 +290,13 @@ extension MapTabViewController: CLLocationManagerDelegate {
         manager.delegate = nil
 
         let region = MKCoordinateRegion(center: coordinate, span: span)
-        
+
         mapView.setRegion(region, animated: true)
         mapView.mapType = .mutedStandard
         mapView.showsUserLocation = true
-        
+
         NetworkHelper.showLoader(true, activityIndicator: activityIndicator)
-        
+
         FuelLoupClient.getNearestEvStations(latitude: coordinate.latitude, longitude: coordinate.longitude, completion: handleStationsLocationResponse(results:error:))
     }
     

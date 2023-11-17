@@ -72,7 +72,7 @@ final class TableTabViewController: UIViewController, DataControllerAware {
             
             evStationsViewModel = favoriteStations.map { station -> ResultViewModel in
                 let id = station.id ?? ""
-                let poi = Poi(name: station.poiName ?? "unknown", phone: station.poiPhone, url: nil)
+                let poi = Poi(name: station.poiName ?? "annotation.no.data".localized, phone: station.poiPhone, url: nil)
                 let position = Position(lat: station.lat, lon: station.lng)
                 let chargingPark = station.parks
                 let address = station.address
